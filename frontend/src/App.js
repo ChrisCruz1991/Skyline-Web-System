@@ -16,7 +16,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1>Users</h1>
+          <h1>Users With Dervin and Christopher</h1>
         </header>
         {this.state.users.map(user => (
           <div key={user.id}>{user.username}</div>
