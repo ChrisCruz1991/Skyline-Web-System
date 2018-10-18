@@ -6,8 +6,8 @@ app.get('/', (req, res) => {
     res.send('Hello from express')
 })
 
-app.get('/about', (req, res) => {
-    res.send('This is the about page')
+app.get('/test', (req, res) => {
+    res.send('This is the testing page')
 })
 
 app.listen(3000, () => {
