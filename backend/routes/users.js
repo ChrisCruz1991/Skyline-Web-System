@@ -8,19 +8,23 @@ router.get("/", function(req, res, next) {
   res.json([
     {
       id: 1,
-      username: "Christopher"
+      username: "Christopher",
+      age: 27
     },
     {
       id: 2,
-      username: "Stacey"
+      username: "Stacey",
+      age: 21
     },
     {
       id: 3,
-      username: "Ibzan"
+      username: "Ibzan",
+      age: 22
     },
     {
       id: 4,
-      username: "Diana"
+      username: "Diana",
+      age: 24
     }
   ]);
 });
