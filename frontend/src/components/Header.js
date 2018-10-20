@@ -1,8 +1,9 @@
 import React from "react";
+import "../styles/header.scss";
 
 const Header = () => (
-  <header>
-    <h1>Mech-2-Tech Demo</h1>
+  <header className="header">
+    <h1 className="header__title">Mech-2-Tech Demo</h1>
   </header>
 );
 

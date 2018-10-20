@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import Header from "./components/Header";
-import Users from "./components/Users";
-import Vehicles from "./components/Vehicles";
+import Header from "./Header";
+import Users from "./Users";
+import Vehicles from "./Vehicles";
 
 class App extends Component {
   render() {
