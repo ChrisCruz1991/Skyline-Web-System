@@ -1,14 +1,11 @@
 import React, { Component } from "react";
-import Header from "./Header";
-import Users from "./Users";
-import Vehicles from "./Vehicles";
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <Users />
-        <Vehicles />
+        <h2>Welcome to Mech-2-Tech Demo!</h2>
+        <p>Click on the links to be taken to a different part of the app!</p>
       </div>
     );
   }
