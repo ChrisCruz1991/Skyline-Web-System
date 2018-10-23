@@ -1,24 +1,53 @@
-import React from "react";
+import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem
+} from "reactstrap";
 
-const Header = () => (
-  <header className="header">
-    <nav className="header__navigation">
-      <div className="header__home">
-        <Link to="/">Mech-2-Tech</Link>
-      </div>
-      <div className="header__navigation-items">
-        <ul>
-          <li>
-            <Link to="/users">Users</Link>
-          </li>
-          <li>
-            <Link to="/vehicles">Vehicles</Link>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </header>
-);
+export default class Header extends Component {
+  state = { isOpen: false };
 
-export default Header;
+  toggle = () => {
+    this.setState({ isOpen: !this.state.isOpen });
+  };
+  render() {
+    return (
+      <header className="header">
+        <Navbar color="dark" light expand="md">
+          <NavbarBrand>
+            <Link to="/">Mech-2-Tech</Link>
+          </NavbarBrand>
+          <NavbarToggler onClick={this.toggle} />
+          <Collapse isOpen={this.state.isOpen} navbar>
+            <Nav className="ml-auto" navbar>
+              <NavItem>
+                <Link to="/users">Users</Link>
+              </NavItem>
+              <NavItem>
+                <Link to="/vehicles">Vehicles</Link>
+              </NavItem>
+              <UncontrolledDropdown nav inNavbar>
+                <DropdownToggle nav caret>
+                  Lorem ipsum
+                </DropdownToggle>
+                <DropdownMenu right>
+                  <DropdownItem>Option 1</DropdownItem>
+                  <DropdownItem>Option 2</DropdownItem>
+                </DropdownMenu>
+              </UncontrolledDropdown>
+            </Nav>
+          </Collapse>
+        </Navbar>
+      </header>
+    );
+  }
+}
