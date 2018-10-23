@@ -24,7 +24,7 @@ export default class Header extends Component {
       <header className="header">
         <Navbar color="dark" light expand="md">
           <NavbarBrand>
-            <Link to="/">Mech-2-Tech</Link>
+            <Link to="/">Mech-2-Tech Dashboard</Link>
           </NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
