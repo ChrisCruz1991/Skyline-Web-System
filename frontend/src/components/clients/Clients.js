@@ -2,24 +2,22 @@ import React, { Component } from "react";
 import { Table } from 'reactstrap';
 import { connect } from 'react-redux';
 
-class App extends Component {
+class Clients extends Component {
 
   handleClick(id) {
     console.log('Funciona', id)
   }
 
   render() {
-    const { vehicles } = this.props.vehicles;
-    console.log(vehicles)
-    console.log(vehicles.length)
-    const listTable = vehicles.length ? (
-      vehicles.map(vehicle => {
+    const { clients } = this.props.clients;
+    const listTable = clients.length ? (
+      clients.map(client => {
         return (
-          <tr key={vehicle.id}>
-            <td>{vehicle.make}</td>
-            <td>{vehicle.model}</td>
-            <td>{vehicle.year}</td>
-            <td>{vehicle.status}</td>
+          <tr key={client.id}>
+            <td>{client.firstName}</td>
+            <td>{client.lastName}</td>
+            <td>{client.phone}</td>
+            <td>{client.direccion}</td>
           </tr>
         )
       })
@@ -34,10 +32,10 @@ class App extends Component {
         <Table>
         <thead>
           <tr>
-            <th>Make</th>
-            <th>Model</th>
-            <th>Year</th>
-            <th>Status</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Phone</th>
+            <th>Direccion</th>
           </tr>
         </thead>
         <tbody>
@@ -51,8 +49,8 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    vehicles: state.vehicles
+    clients: state.clients
   }
 }
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps)(Clients);

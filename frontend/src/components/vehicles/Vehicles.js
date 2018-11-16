@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { Table } from 'reactstrap';
 import { connect } from 'react-redux';
 
-class App extends Component {
+class Vehicles extends Component {
 
   handleClick(id) {
-    console.log('Funciona', id)
+      // this.props.history.push('/vehicle/2')
   }
 
   render() {
@@ -15,7 +15,7 @@ class App extends Component {
     const listTable = vehicles.length ? (
       vehicles.map(vehicle => {
         return (
-          <tr key={vehicle.id}>
+          <tr key={vehicle.id} onClick={() => this.handleClick(vehicle.id)}>
             <td>{vehicle.make}</td>
             <td>{vehicle.model}</td>
             <td>{vehicle.year}</td>
@@ -29,7 +29,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        <h2 className="text-center pt-3">This is all the vehicle in taller</h2>
+        <h2 className="text-center pt-3">All the vehicle in the Database</h2>
         <p className="text-center pb-3">Click on the links to be taken to a different part of the app!</p>
         <Table>
         <thead>
@@ -55,4 +55,12 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps)(Vehicles);
+
+
+
+// componentDidMount() {
+//   axios.get("/vehicles").then(res => {
+//     this.setState({ vehicles: res.data });
+//   });
+// }
