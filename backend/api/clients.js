@@ -5,7 +5,7 @@ const router = express.Router();
 router.get("/client", (req, res) => {
   pool.query("SELECT * FROM CLIENT", (err, result) => {
     if (err) throw err;
-    return res.send({ data: result, message: "All clients" });
+    return res.json(result);
   });
 });
 
@@ -14,7 +14,7 @@ router.get("/client/:id", (req, res) => {
   console.log(id);
   pool.query(`SELECT * FROM CLIENT WHERE client_id=${id}`, (err, result) => {
     if (err) throw err;
-    return res.send({ data: result });
+    return res.json(result);
   });
 });
 
@@ -27,7 +27,7 @@ router.get("/client/list_cars", (req, res) => {
     WHERE CLIENT.client_id=1;`,
     (err, result) => {
       if (err) throw err;
-      res.send({ error: false, data: result });
+      res.json(result);
     }
   );
 });

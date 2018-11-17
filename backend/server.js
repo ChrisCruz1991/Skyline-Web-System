@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
-const pool = require("./model/connection");
 
 const clientRoute = require("./api/clients");
 const vehicleRoute = require("./api/vehicles");
@@ -16,6 +15,21 @@ app.use(
   })
 );
 
+/*
+  Enabling CORS for api use with front-end code
+*/
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
+
+/*
+  Api routes
+*/
 app.use("/api", clientRoute);
 app.use("/api", vehicleRoute);
 app.use("/api", employeeRoute);
