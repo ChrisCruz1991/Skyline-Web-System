@@ -45,7 +45,7 @@ class Vehicles extends Component {
       <div className="App">
         <h2 className="text-center pt-3">All the vehicles in the Database</h2>
         <label htmlFor="search">Search for vehicle type: </label>
-        <input type="text" htmlName="search"/>
+        <input type="text" name="search"/>
         <Table>
         <thead>
           <tr>
