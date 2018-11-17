@@ -46,5 +46,5 @@ app.all("*", (req, res, next) => {
 
 // port must be set to 8080 because incoming http requests are routed from port 80 to port 8080
 app.listen(PORT, () => {
-  console.log("Node app is running on port 8080");
+  console.log("Node app is running on port " + PORT);
 });
