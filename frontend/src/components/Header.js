@@ -31,13 +31,13 @@ export default class Header extends Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem className="my-auto mx-2">
-                <Link to="/employees" className="text-white my-3">Employee's</Link>
+                <Link to="/employee" className="text-white my-3">Employee's</Link>
               </NavItem>
               <NavItem className="my-auto mx-2">
                 <Link to="/clients" className="text-white ">Client's</Link>
               </NavItem>
               <NavItem className="my-auto mx-2">
-                <Link to="/vehicles" className="text-white ">Vehicle's</Link>
+                <Link to="/vehicle" className="text-white ">Vehicle's</Link>
               </NavItem>
               <NavItem className="my-auto mx-2">
                 <Link to="/" className="text-white ">Service's</Link>

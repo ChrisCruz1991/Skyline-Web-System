@@ -1,43 +1,59 @@
 import React, { Component } from "react";
 import { Table } from 'reactstrap';
-import { connect } from 'react-redux';
 
 class Vehicles extends Component {
 
+  state = {
+    vehicles: []
+  }
+
   handleClick(id) {
-      // this.props.history.push('/vehicle/2')
+      this.props.history.push('/vehicle/' + id);
+  }
+
+  componentDidMount() {
+    fetch('http://192.168.1.115:8080/api/vehicle')
+    .then(response => response.json())
+    .then(data => {
+      this.setState( {
+        vehicles: data
+      })
+    })
   }
 
   render() {
-    const { vehicles } = this.props.vehicles;
-    console.log(vehicles)
-    console.log(vehicles.length)
+    console.log('data from state: ', this.state.vehicles)
+    const { vehicles } = this.state;
     const listTable = vehicles.length ? (
       vehicles.map(vehicle => {
+        console.log(vehicle)
         return (
           <tr key={vehicle.id} onClick={() => this.handleClick(vehicle.id)}>
-            <td>{vehicle.make}</td>
-            <td>{vehicle.model}</td>
-            <td>{vehicle.year}</td>
-            <td>{vehicle.status}</td>
+            <td>{vehicle.Name}</td>
+            <td>{vehicle.Make}</td>
+            <td>{vehicle.Model}</td>
+            <td>{vehicle.Year}</td>
+            <td>{vehicle.Color}</td>
           </tr>
         )
       })
     ) : (
-        <tr><td>No Data..</td></tr>
+        <tr><td>Loading Data...</td></tr>
     )
 
     return (
       <div className="App">
-        <h2 className="text-center pt-3">All the vehicle in the Database</h2>
-        <p className="text-center pb-3">Click on the links to be taken to a different part of the app!</p>
+        <h2 className="text-center pt-3">All the vehicles in the Database</h2>
+        <label htmlFor="search">Search for vehicle type: </label>
+        <input type="text" htmlName="search"/>
         <Table>
         <thead>
           <tr>
+            <th>Client</th>
             <th>Make</th>
             <th>Model</th>
             <th>Year</th>
-            <th>Status</th>
+            <th>Color</th>
           </tr>
         </thead>
         <tbody>
@@ -49,13 +65,8 @@ class Vehicles extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    vehicles: state.vehicles
-  }
-}
 
-export default connect(mapStateToProps)(Vehicles);
+export default Vehicles;
 
 
 
