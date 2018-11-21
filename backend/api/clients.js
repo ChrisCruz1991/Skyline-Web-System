@@ -46,7 +46,7 @@ router.get("/client/:id", (req, res) => {
         };
       });
       return res.json({
-        client: `${result[0].Name} ${result[0].Last_Name}`,
+        name: `${result[0].Name} ${result[0].Last_Name}`,
         vehicles: list_vehicles
       });
     }

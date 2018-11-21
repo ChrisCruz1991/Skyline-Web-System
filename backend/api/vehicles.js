@@ -10,6 +10,7 @@ router.get("/vehicle", (req, res) => {
     model AS Model,
     color AS Color,
     year AS Year,
+    status AS Status,
     first_name AS Name
     FROM VEHICLE
     INNER JOIN CLIENT ON CLIENT.client_id=VEHICLE.CLIENT_client_id;`,

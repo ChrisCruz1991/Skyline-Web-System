@@ -38,7 +38,7 @@ router.get("/employee/:id", (req, res) => {
         };
       });
       res.json({
-        employee: `${result[0].first_name} ${result[0].last_name}`,
+        name: `${result[0].first_name} ${result[0].last_name}`,
         role: result[0].role,
         vehicles: list_vehicles
       });
