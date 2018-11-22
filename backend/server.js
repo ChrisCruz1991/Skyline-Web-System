@@ -2,18 +2,18 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 
-const clientRoute = require("./api/clients");
-const vehicleRoute = require("./api/vehicles");
-const employeeRoute = require("./api/employees");
+const clientRoute = require("./routes/clients");
+const vehicleRoute = require("./routes/vehicles");
+const employeeRoute = require("./routes/employees");
 
 const PORT = process.env.PORT || 8080;
 
-app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
-    extended: true
+    extended: false
   })
 );
+app.use(bodyParser.json());
 
 /*
   Enabling CORS for api use with front-end code
@@ -30,9 +30,9 @@ app.use((req, res, next) => {
 /*
   Api routes
 */
-app.use("/api", clientRoute);
-app.use("/api", vehicleRoute);
-app.use("/api", employeeRoute);
+app.use("/api/client", clientRoute);
+app.use("/api/vehicle", vehicleRoute);
+app.use("/api/employee", employeeRoute);
 
 // default route
 app.get("/", function(req, res) {

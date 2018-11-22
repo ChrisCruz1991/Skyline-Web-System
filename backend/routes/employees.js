@@ -2,7 +2,7 @@ const pool = require("../model/connection");
 const express = require("express");
 const router = express.Router();
 
-router.get("/employee", (req, res) => {
+router.get("/", (req, res) => {
   pool.query(
     `SELECT
       employee_id AS id,
@@ -20,7 +20,7 @@ router.get("/employee", (req, res) => {
   );
 });
 
-router.get("/employee/:id", (req, res) => {
+router.get("/:id", (req, res) => {
   const id = req.params.id;
   pool.query(
     `SELECT first_name, last_name, role, make, model, color, year
@@ -38,7 +38,7 @@ router.get("/employee/:id", (req, res) => {
         };
       });
       res.json({
-        employee: `${result[0].first_name} ${result[0].last_name}`,
+        name: `${result[0].first_name} ${result[0].last_name}`,
         role: result[0].role,
         vehicles: list_vehicles
       });
