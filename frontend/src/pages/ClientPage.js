@@ -24,7 +24,7 @@ export default class ClientPage extends Component {
       return <p>Loading...</p>;
     }
 
-    const { name, role, vehicles } = client;
+    const { name, vehicles } = client;
 
     /*
       Need fixing and styling, but
