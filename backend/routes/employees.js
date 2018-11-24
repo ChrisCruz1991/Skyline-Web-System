@@ -23,12 +23,17 @@ router.get("/", (req, res) => {
 router.get("/:id", (req, res) => {
   const id = req.params.id;
   pool.query(
-    `SELECT first_name, last_name, role, make, model, color, year
+    `SELECT first_name, last_name, address, phone, role, make, model, color, year
     FROM VEHICLE
     INNER JOIN EMPLOYEE ON EMPLOYEE.employee_id=VEHICLE.EMPLOYEE_employee_id
     WHERE employee_id=${id};`,
     (err, result) => {
-      if (err) throw err;
+      if (err) {
+        return res.send({
+          success: false,
+          message: "Dervin fucked up: " + err
+        });
+      }
       const list_vehicles = result.map(item => {
         return {
           Make: item.make,
@@ -39,6 +44,8 @@ router.get("/:id", (req, res) => {
       });
       res.json({
         name: `${result[0].first_name} ${result[0].last_name}`,
+        phone: result[0].phone,
+        address: result[0].address,
         role: result[0].role,
         vehicles: list_vehicles
       });

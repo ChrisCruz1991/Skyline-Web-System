@@ -10,6 +10,7 @@ export default class Dashboard extends Component {
   };
 
   componentDidMount() {
+    console.log(localStorage.getItem("userData"));
     axios.get("http://localhost:8080/api/vehicle").then(res =>
       this.setState({
         vehicles: res.data,
