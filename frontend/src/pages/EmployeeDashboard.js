@@ -10,7 +10,7 @@ export default class EmployeePage extends Component {
   };
 
   componentDidMount() {
-    axios.get("http://localhost:8080/api/employee").then(res =>
+    axios.get("http://192.168.1.252:8080/api/employee").then(res =>
       this.setState({
         employees: res.data,
         isLoading: false
@@ -32,7 +32,7 @@ export default class EmployeePage extends Component {
         <p className="text-center pb-3">
           Click on the links to be taken to a different part of the app!
         </p>
-        <Table>
+        <Table striped hover>
           <thead>
             <tr>
               <th>First Name</th>

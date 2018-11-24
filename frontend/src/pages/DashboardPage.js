@@ -10,7 +10,7 @@ export default class Dashboard extends Component {
   };
 
   componentDidMount() {
-    axios.get("http://localhost:8080/api/vehicle").then(res =>
+    axios.get("http://192.168.1.252:8080/api/vehicle").then(res =>
       this.setState({
         vehicles: res.data,
         isLoading: false
@@ -31,7 +31,7 @@ export default class Dashboard extends Component {
         <p className="text-center pb-3">
           Click on the links to be taken to a different part of the app!
         </p>
-        <Table>
+        <Table striped>
           <thead>
             <tr>
               <th>Client</th>

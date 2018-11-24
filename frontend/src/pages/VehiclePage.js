@@ -10,7 +10,7 @@ export default class Vehicle extends Component {
 
   componentDidMount() {
     const id = this.props.match.params.id;
-    axios.get(`http://localhost:8080/api/vehicle/${id}`).then(res =>
+    axios.get(`http://192.168.1.252:8080/api/vehicle/${id}`).then(res =>
       this.setState({
         vehicle: res.data,
         isLoading: false
