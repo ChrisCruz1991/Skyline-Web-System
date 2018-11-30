@@ -4,17 +4,27 @@ const router = express.Router();
 
 // post request for employee
 router.post("/", (req, res) => {
-  const { email, password } = req.body;
+  let { email, password } = req.body;
+
+  console.log("email:", email);
+  console.log("password:", password);
+
+  email = email.trim();
+  password = password.trim();
   pool.query(
     `SELECT
+    employee_id,
     first_name,
     last_name,
     email,
     password,
-    name
+    name,
+    garage_id
     FROM EMPLOYEE
-    INNER JOIN GARAGE ON GARAGE.EMPLOYEE_employee_id=EMPLOYEE_employee_id
-    WHERE email = ?`,
+    INNER JOIN GARAGE
+    ON EMPLOYEE.GARAGE_garage_id = GARAGE.garage_id
+    WHERE role = 'manager'
+    AND email = ?`,
     [email],
     (err, results) => {
       if (err) {
@@ -26,16 +36,23 @@ router.post("/", (req, res) => {
       } else {
         if (results.length > 0) {
           if (results[0].password === password) {
-            res.send({
+            res.json({
               code: 200,
               success: true,
               message: "login successful",
-              data: results[0]
+              results: {
+                garage_id: results[0].garage_id,
+                garage_name: results[0].name,
+                employee_id: results[0].employee_id,
+                employee_name: results[0].first_name,
+                employee_last_name: results[0].last_name
+              }
             });
           } else {
             res.send({
               code: 204,
-              sucess: "Email and password does not match"
+              sucess: false,
+              message: "Email and/or password do not match"
             });
           }
         } else {

@@ -18,7 +18,7 @@ class Routes extends Component {
           <Header />
           <div className="app">
             <Switch>
-              <Route exact path="/" component={Dashboard} />
+              <Route exact path="/dashboard" component={Dashboard} />
               <Route path="/signup" component={SignupPage} />
               <Route path="/login" component={LoginPage} />
               <Route path="/vehicle/:id" component={VehiclePage} />

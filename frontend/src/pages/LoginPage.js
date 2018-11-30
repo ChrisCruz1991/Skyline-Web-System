@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import UserLoginForm from "../components/UserLoginForm";
 import { Button } from "reactstrap";
+import { setInStorage, getFromStorage } from "../utils/storage";
 
 export default class LoginPage extends Component {
   state = {
@@ -28,9 +29,12 @@ export default class LoginPage extends Component {
       })
       .then(res => {
         console.log(res);
-        localStorage.setItem("userData", res.data);
-        console.log(localStorage.getItem("userData"));
-        this.props.history.push("/");
+        if (res.data.success) {
+          console.log("Im in");
+          const obj = res.data.results;
+          setInStorage("object", obj);
+          this.props.history.push("/dashboard");
+        }
       })
       .catch(error => console.log(error));
   };
