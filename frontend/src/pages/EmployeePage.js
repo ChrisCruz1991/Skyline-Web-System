@@ -25,7 +25,7 @@ export default class EmployeePage extends Component {
   componentDidMount() {
     const id = this.props.match.params.id;
     console.log("Id from employee", id);
-    axios.get(`http://192.168.1.252:8080/api/employee/${id}`).then(res =>
+    axios.get(`http://172.20.10.2:8080/api/employee/${id}`).then(res =>
       this.setState({
         employee: res.data,
         isLoading: false

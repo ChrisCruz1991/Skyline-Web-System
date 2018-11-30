@@ -10,7 +10,7 @@ export default class EmployeePage extends Component {
   };
 
   componentDidMount() {
-    axios.get("http://192.168.1.252:8080/api/employee").then(res =>
+    axios.get("http://172.20.10.2:8080/api/employee").then(res =>
       this.setState({
         employees: res.data,
         isLoading: false

@@ -11,7 +11,7 @@ export default class CarsWithoutEmployee extends Component {
     };
 
     componentDidMount() {
-        axios.get("http://192.168.1.252:8080/api/vehicle").then(res =>
+        axios.get("http://172.20.10.2:8080/api/vehicle").then(res =>
             this.setState({
                 vehicles: res.data.filter(vehicle => (vehicle.Status === 0)),
                 isLoading: false

@@ -10,7 +10,7 @@ export default class Dashboard extends Component {
   };
 
   componentDidMount() {
-    axios.get("http://192.168.1.252:8080/api/vehicle").then(res =>
+    axios.get("http://172.20.10.2:8080/api/vehicle").then(res =>
       this.setState({
         vehicles: res.data,
         isLoading: false
@@ -21,6 +21,7 @@ export default class Dashboard extends Component {
   render() {
     const { vehicles, isLoading } = this.state;
 
+    console.log(this.state)
     if (isLoading) {
       return <p>Loading data...</p>;
     }

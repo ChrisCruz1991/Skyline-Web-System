@@ -10,7 +10,7 @@ export default class ClientDashboard extends Component {
     isLoading: true
   };
   componentDidMount() {
-    axios.get("http://192.168.1.252:8080/api/client").then(res =>
+    axios.get("http://172.20.10.2:8080/api/client").then(res =>
       this.setState({
         clients: res.data,
         isLoading: false,
