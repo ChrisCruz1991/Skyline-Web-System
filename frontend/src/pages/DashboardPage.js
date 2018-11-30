@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import DashboardTable from "../components/DashboardTable";
 import { Table } from "reactstrap";
 import axios from "axios";
+import { getFromStorage, setInStorage } from "../utils/storage";
 
 export default class Dashboard extends Component {
   state = {
@@ -10,7 +11,10 @@ export default class Dashboard extends Component {
   };
 
   componentDidMount() {
-    axios.get("http://localhost:8080/api/vehicle").then(res =>
+    const { garage_id, employee_id } = getFromStorage("object");
+    console.log("garage id:", garage_id);
+    console.log("employee id:", employee_id);
+    axios.get("http://localhost:8080/api/vehicle/" + garage_id).then(res =>
       this.setState({
         vehicles: res.data,
         isLoading: false
@@ -24,6 +28,8 @@ export default class Dashboard extends Component {
     if (isLoading) {
       return <p>Loading data...</p>;
     }
+
+    console.log(vehicles);
 
     return (
       <div className="App">
@@ -45,7 +51,7 @@ export default class Dashboard extends Component {
           <tbody>
             {vehicles.map(vehicle => (
               <DashboardTable
-                id={vehicle.id}
+                key={vehicle.id}
                 name={vehicle.Name}
                 make={vehicle.Make}
                 model={vehicle.Model}

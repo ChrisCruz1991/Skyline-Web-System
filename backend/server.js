@@ -1,19 +1,30 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
+const session = require("express-session");
 
 const clientRoute = require("./routes/clients");
 const vehicleRoute = require("./routes/vehicles");
 const employeeRoute = require("./routes/employees");
+const loginRoute = require("./routes/login");
+const signupRoute = require("./routes/signup");
 
 const PORT = process.env.PORT || 8080;
 
+app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
-    extended: false
+    extended: true
   })
 );
-app.use(bodyParser.json());
+app.use(
+  session({
+    secret: "My secret key",
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true }
+  })
+);
 
 /*
   Enabling CORS for api use with front-end code
@@ -33,6 +44,8 @@ app.use((req, res, next) => {
 app.use("/api/client", clientRoute);
 app.use("/api/vehicle", vehicleRoute);
 app.use("/api/employee", employeeRoute);
+app.use("/api/login", loginRoute);
+app.use("/api/signup", signupRoute);
 
 // default route
 app.get("/", function(req, res) {

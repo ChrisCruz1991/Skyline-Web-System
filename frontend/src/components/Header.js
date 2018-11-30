@@ -48,6 +48,16 @@ export default class Header extends Component {
                   Services
                 </Link>
               </NavItem>
+              <NavItem className="my-auto mx-2">
+                <Link to="/signup" className="text-white">
+                  Sign Up
+                </Link>
+              </NavItem>
+              <NavItem className="my-auto mx-2">
+                <Link to="/login" className="text-white">
+                  Log In
+                </Link>
+              </NavItem>
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret className="text-white">
                   Nombre User
