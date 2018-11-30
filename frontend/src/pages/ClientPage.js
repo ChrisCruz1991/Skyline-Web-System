@@ -10,7 +10,7 @@ export default class ClientPage extends Component {
 
   componentDidMount() {
     const id = this.props.match.params.id;
-    axios.get(`http://172.20.10.2:8080/api/client/${id}`)
+    axios.get(`http://localhost:8080/api/client/${id}`)
       .then(res =>
         this.setState({
           client: res.data,
