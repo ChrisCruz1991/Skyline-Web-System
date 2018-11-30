@@ -32,7 +32,7 @@ export default class EmployeePage extends Component {
         <p className="text-center pb-3">
           Click on the links to be taken to a different part of the app!
         </p>
-        <Table>
+        <Table striped hover>
           <thead>
             <tr>
               <th>First Name</th>

@@ -25,6 +25,7 @@ export default class Dashboard extends Component {
   render() {
     const { vehicles, isLoading } = this.state;
 
+    console.log(this.state)
     if (isLoading) {
       return <p>Loading data...</p>;
     }
@@ -37,7 +38,7 @@ export default class Dashboard extends Component {
         <p className="text-center pb-3">
           Click on the links to be taken to a different part of the app!
         </p>
-        <Table>
+        <Table striped>
           <thead>
             <tr>
               <th>Client</th>
