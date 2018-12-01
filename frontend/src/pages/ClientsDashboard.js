@@ -1,16 +1,24 @@
 import React, { Component } from "react";
-import { Table, InputGroup, InputGroupText, InputGroupAddon, Input } from "reactstrap";
-import ClientTable from "../components/ClientsTable";
+import {
+  Table,
+  InputGroup,
+  InputGroupText,
+  InputGroupAddon,
+  Input
+} from "reactstrap";
+import ClientsTable from "../components/ClientsTable";
 import axios from "axios";
+import { getFromStorage } from "../utils/storage";
 
-export default class ClientDashboard extends Component {
+export default class ClientsDashboard extends Component {
   state = {
     clients: [],
     clientsFilter: [],
     isLoading: true
   };
   componentDidMount() {
-    axios.get("http://localhost:8080/api/client").then(res =>
+    const { garage_id } = getFromStorage("object");
+    axios.get("http://localhost:8080/api/clients/" + garage_id).then(res =>
       this.setState({
         clients: res.data,
         isLoading: false,
@@ -19,16 +27,18 @@ export default class ClientDashboard extends Component {
     );
   }
 
-  onInputChange = (e) => {
+  onInputChange = e => {
     this.setState({
       clientsFilter: this.state.clients.filter(client => {
-        return (client.Name.toLowerCase() + client.Last_Name.toLowerCase())
-        .includes(e.target.value.toLowerCase().replace(' ', ''))
+        return (
+          client.Name.toLowerCase() + client.Last_Name.toLowerCase()
+        ).includes(e.target.value.toLowerCase().replace(" ", ""));
       })
-    })
-  }
+    });
+  };
 
   render() {
+    // Filter will be done later
     const { clientsFilter, isLoading } = this.state;
 
     if (isLoading) {
@@ -41,9 +51,9 @@ export default class ClientDashboard extends Component {
         </h2>
         <InputGroup className="inputGroup mx-auto">
           <InputGroupAddon addonType="prepend">
-            <InputGroupText>To the Left!</InputGroupText>
+            <InputGroupText>Search:</InputGroupText>
           </InputGroupAddon>
-          <Input onChange={this.onInputChange}/>
+          <Input onChange={this.onInputChange} />
         </InputGroup>
         <br />
         <p className="text-center pb-3">
@@ -60,7 +70,8 @@ export default class ClientDashboard extends Component {
           </thead>
           <tbody>
             {clientsFilter.map(client => (
-              <ClientTable key={client.id}
+              <ClientsTable
+                key={client.id}
                 id={client.id}
                 name={client.Name}
                 lastName={client.Last_Name}

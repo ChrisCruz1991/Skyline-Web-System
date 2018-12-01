@@ -41,11 +41,11 @@ app.use((req, res, next) => {
 /*
   Api routes
 */
-app.use("/api/client", clientRoute);
-app.use("/api/vehicle", vehicleRoute);
-app.use("/api/employee", employeeRoute);
-app.use("/api/login", loginRoute);
-app.use("/api/signup", signupRoute);
+app.use("/api", clientRoute);
+app.use("/api", vehicleRoute);
+app.use("/api", employeeRoute);
+app.use("/api", loginRoute);
+app.use("/api", signupRoute);
 
 // default route
 app.get("/", function(req, res) {

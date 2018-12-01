@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Table } from "reactstrap";
 import axios from "axios";
 import EmployeesTable from "../components/EmployeesTable";
+import { getFromStorage } from "../utils/storage";
 
 export default class EmployeePage extends Component {
   state = {
@@ -10,12 +11,15 @@ export default class EmployeePage extends Component {
   };
 
   componentDidMount() {
-    axios.get("http://localhost:8080/api/employee").then(res =>
-      this.setState({
-        employees: res.data,
-        isLoading: false
-      })
-    );
+    const { garage_id } = getFromStorage("object");
+    axios
+      .get("http://localhost:8080/api/employee/table/" + garage_id)
+      .then(res =>
+        this.setState({
+          employees: res.data,
+          isLoading: false
+        })
+      );
   }
 
   render() {
@@ -24,6 +28,7 @@ export default class EmployeePage extends Component {
     if (isLoading) {
       return <p>Loading employees...</p>;
     }
+
     return (
       <div className="App">
         <h2 className="text-center pt-3">
@@ -46,6 +51,7 @@ export default class EmployeePage extends Component {
           <tbody>
             {employees.map(employee => (
               <EmployeesTable
+                key={employee.id}
                 id={employee.id}
                 name={employee.Name}
                 lastName={employee.Last_Name}

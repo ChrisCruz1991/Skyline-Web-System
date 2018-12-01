@@ -7,10 +7,9 @@ class DashboardTable extends Component {
   };
 
   render() {
-    const { key, name, make, model, year, color, status } = this.props;
-
+    const { id, name, make, model, year, color, status } = this.props;
     return (
-      <tr key={key} onClick={() => this.handleClick(key)}>
+      <tr id={id} onClick={() => this.handleClick(id)}>
         <td>{name}</td>
         <td>{make}</td>
         <td>{model}</td>

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import DashboardTable from "../components/DashboardTable";
 import { Table } from "reactstrap";
 import axios from "axios";
-import { getFromStorage, setInStorage } from "../utils/storage";
+import { getFromStorage } from "../utils/storage";
 
 export default class Dashboard extends Component {
   state = {
@@ -11,26 +11,23 @@ export default class Dashboard extends Component {
   };
 
   componentDidMount() {
-    const { garage_id, employee_id } = getFromStorage("object");
-    console.log("garage id:", garage_id);
-    console.log("employee id:", employee_id);
-    axios.get("http://localhost:8080/api/vehicle/" + garage_id).then(res =>
-      this.setState({
-        vehicles: res.data,
-        isLoading: false
-      })
-    );
+    const { garage_id } = getFromStorage("object");
+    axios
+      .get("http://localhost:8080/api/vehicle/dashboard/" + garage_id)
+      .then(res =>
+        this.setState({
+          vehicles: res.data,
+          isLoading: false
+        })
+      );
   }
 
   render() {
     const { vehicles, isLoading } = this.state;
 
-    console.log(this.state)
     if (isLoading) {
       return <p>Loading data...</p>;
     }
-
-    console.log(vehicles);
 
     return (
       <div className="App">
@@ -53,6 +50,7 @@ export default class Dashboard extends Component {
             {vehicles.map(vehicle => (
               <DashboardTable
                 key={vehicle.id}
+                id={vehicle.id}
                 name={vehicle.Name}
                 make={vehicle.Make}
                 model={vehicle.Model}

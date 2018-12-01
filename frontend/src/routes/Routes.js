@@ -5,7 +5,7 @@ import SignupPage from "../pages/SignupPage";
 import LoginPage from "../pages/LoginPage";
 import Dashboard from "../pages/DashboardPage";
 import VehiclePage from "../pages/VehiclePage";
-import ClientDashboard from "../pages/ClientDashboard";
+import ClientsDashboard from "../pages/ClientsDashboard";
 import ClientPage from "../pages/ClientPage";
 import EmployeeDashboard from "../pages/EmployeeDashboard";
 import EmployeePage from "../pages/EmployeePage";
@@ -22,7 +22,7 @@ class Routes extends Component {
               <Route path="/signup" component={SignupPage} />
               <Route path="/login" component={LoginPage} />
               <Route path="/vehicle/:id" component={VehiclePage} />
-              <Route path="/clients" component={ClientDashboard} />
+              <Route path="/clients" component={ClientsDashboard} />
               <Route path="/client/:id" component={ClientPage} />
               <Route path="/employees" component={EmployeeDashboard} />
               <Route path="/employee/:id" component={EmployeePage} />

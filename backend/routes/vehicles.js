@@ -2,8 +2,7 @@ const pool = require("../model/connection");
 const express = require("express");
 const router = express.Router();
 
-router.get("/:id", (req, res) => {
-  console.log(req.params.id);
+router.get("/vehicle/dashboard/:id", (req, res) => {
   const id = req.params.id;
   pool.query(
     `SELECT
@@ -25,7 +24,7 @@ router.get("/:id", (req, res) => {
   );
 });
 
-router.get("/:id", (req, res) => {
+router.get("/vehicle/:id", (req, res) => {
   const id = req.params.id;
   pool.query(`SELECT * FROM VEHICLE WHERE vehicle_id=${id}`, (err, result) => {
     if (err) throw err;
