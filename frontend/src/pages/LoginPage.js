@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import UserLoginForm from "../components/UserLoginForm";
 import { Button } from "reactstrap";
-import { setInStorage, getFromStorage } from "../utils/storage";
+import { setInStorage } from "../utils/storage";
 
 export default class LoginPage extends Component {
   state = {

@@ -2,15 +2,20 @@ const pool = require("../model/connection");
 const express = require("express");
 const router = express.Router();
 
-router.get("/", (req, res) => {
+router.get("/clients/:id", (req, res) => {
+  const id = req.params.id;
   pool.query(
     `SELECT
-      client_id AS id,
-      first_name AS Name,
-      last_name AS Last_Name,
-      phone AS Phone,
-      email AS Email
-      FROM CLIENT`,
+    client_id AS id,
+    first_name AS Name,
+    last_name AS Last_Name,
+    email AS Email,
+    phone AS Phone
+    FROM VEHICLE
+    INNER JOIN CLIENT
+    ON CLIENT.client_id = VEHICLE.CLIENT_client_id
+    WHERE VEHICLE.GARAGE_garage_id = ?`,
+    id,
     (err, result) => {
       if (err) throw err;
       return res.json(result);
@@ -18,7 +23,7 @@ router.get("/", (req, res) => {
   );
 });
 
-router.get("/:id", (req, res) => {
+router.get("/client/:id", (req, res) => {
   const id = req.params.id;
   pool.query(
     `SELECT

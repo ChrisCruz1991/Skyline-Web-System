@@ -2,7 +2,7 @@ const express = require("express");
 const pool = require("../model/connection");
 const router = express.Router();
 
-router.post("/", (req, res) => {
+router.post("/signup", (req, res) => {
   const {
     garage_name,
     garage_address,

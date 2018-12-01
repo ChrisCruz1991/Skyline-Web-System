@@ -9,7 +9,7 @@ class ClientsTable extends Component {
     const { id, name, lastName, phone, email } = this.props;
 
     return (
-      <tr key={id} onClick={() => this.handleClick(id)}>
+      <tr id={id} onClick={() => this.handleClick(id)}>
         <td>{name}</td>
         <td>{lastName}</td>
         <td>{phone}</td>
