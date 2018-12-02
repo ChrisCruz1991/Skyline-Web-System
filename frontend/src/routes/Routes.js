@@ -9,12 +9,9 @@ import ClientsDashboard from "../pages/ClientsDashboard";
 import ClientPage from "../pages/ClientPage";
 import EmployeesDashboard from "../pages/EmployeesDashboard";
 import EmployeePage from "../pages/EmployeePage";
-<<<<<<< HEAD
 import Home from "../pages/Home";
-=======
 import EmployeesForm from "../pages/EmployeesForm";
 import Membership from "../pages/Membership";
->>>>>>> skyline-testing
 
 class Routes extends Component {
   render() {
