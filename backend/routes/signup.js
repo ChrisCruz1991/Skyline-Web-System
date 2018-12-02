@@ -26,7 +26,7 @@ router.post("/signup", (req, res) => {
   if (!password) {
     return res.send({
       success: false,
-      message: "Error: Password cannto be blank"
+      message: "Error: Password cannot be blank"
     });
   }
 

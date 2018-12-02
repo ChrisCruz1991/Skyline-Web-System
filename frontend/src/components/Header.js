@@ -6,21 +6,31 @@ import {
   NavbarToggler,
   NavbarBrand,
   Nav,
-  NavItem,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
+  NavItem
 } from "reactstrap";
+import { getFromStorage } from "../utils/storage";
 
 export default class Header extends Component {
-  state = { isOpen: false };
+  state = {
+    isOpen: false,
+    name: "",
+    isLoading: true
+  };
 
   toggle = () => {
     this.setState({ isOpen: !this.state.isOpen });
   };
 
+  componentDidMount() {
+    const { employee_name } = getFromStorage("object");
+    this.setState({
+      name: employee_name
+    });
+  }
+
   render() {
+    const { name, isLoading } = this.state;
+
     return (
       <header className="header">
         <Navbar color="dark" light expand="md">
@@ -31,6 +41,11 @@ export default class Header extends Component {
               <NavItem className="my-auto mx-2">
                 <Link to="/" className="text-white my-3">
                   Home
+                </Link>
+              </NavItem>
+              <NavItem>
+                <Link to="/dashboard" className="text-white my-3">
+                  Dashboard
                 </Link>
               </NavItem>
               <NavItem className="my-auto mx-2">
@@ -58,15 +73,10 @@ export default class Header extends Component {
                   Log In
                 </Link>
               </NavItem>
-              <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav caret className="text-white">
-                  Nombre User
-                </DropdownToggle>
-                <DropdownMenu right>
-                  <DropdownItem>SIGN OUT</DropdownItem>
-                  <DropdownItem>My Data</DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown>
+              <NavItem className="my-auto mx-2 text-white">
+                {name}
+                's Garage
+              </NavItem>
             </Nav>
           </Collapse>
         </Navbar>

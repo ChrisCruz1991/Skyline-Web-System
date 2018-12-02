@@ -4,8 +4,10 @@ import {
   InputGroup,
   InputGroupText,
   InputGroupAddon,
-  Input
+  Input,
+  Button
 } from "reactstrap";
+import { Link } from "react-router-dom";
 import ClientsTable from "../components/ClientsTable";
 import axios from "axios";
 import { getFromStorage } from "../utils/storage";
@@ -49,7 +51,10 @@ export default class ClientsDashboard extends Component {
         <h2 className="text-center pt-3">
           This is all the Clients in database
         </h2>
-        <InputGroup className="inputGroup mx-auto">
+        <InputGroup
+          className="inputGroup mx-auto"
+          style={{ borderRadius: "15px" }}
+        >
           <InputGroupAddon addonType="prepend">
             <InputGroupText>Search:</InputGroupText>
           </InputGroupAddon>
@@ -61,7 +66,7 @@ export default class ClientsDashboard extends Component {
         </p>
         <Table striped>
           <thead>
-            <tr>
+            <tr style={{ textAlign: "center" }}>
               <th>First Name</th>
               <th>Last Name</th>
               <th>Phone</th>
@@ -81,6 +86,9 @@ export default class ClientsDashboard extends Component {
             ))}
           </tbody>
         </Table>
+        <Link to="/clients/new">
+          <Button color="info">Add New Client</Button>
+        </Link>
       </div>
     );
   }

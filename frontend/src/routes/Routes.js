@@ -7,9 +7,14 @@ import Dashboard from "../pages/DashboardPage";
 import VehiclePage from "../pages/VehiclePage";
 import ClientsDashboard from "../pages/ClientsDashboard";
 import ClientPage from "../pages/ClientPage";
-import EmployeeDashboard from "../pages/EmployeeDashboard";
+import EmployeesDashboard from "../pages/EmployeesDashboard";
 import EmployeePage from "../pages/EmployeePage";
+<<<<<<< HEAD
 import Home from "../pages/Home";
+=======
+import EmployeesForm from "../pages/EmployeesForm";
+import Membership from "../pages/Membership";
+>>>>>>> skyline-testing
 
 class Routes extends Component {
   render() {
@@ -23,9 +28,11 @@ class Routes extends Component {
               <Route path="/signup" component={SignupPage} />
               <Route path="/login" component={LoginPage} />
               <Route path="/vehicle/:id" component={VehiclePage} />
-              <Route path="/clients" component={ClientsDashboard} />
+              <Route exact path="/clients" component={ClientsDashboard} />
+              <Route path="/clients/new" component={Membership} />
               <Route path="/client/:id" component={ClientPage} />
-              <Route path="/employees" component={EmployeeDashboard} />
+              <Route exact path="/employees" component={EmployeesDashboard} />
+              <Route path="/employees/new" component={EmployeesForm} />
               <Route path="/employee/:id" component={EmployeePage} />
               <Route exact path="/" component={Home} />
             </Switch>
