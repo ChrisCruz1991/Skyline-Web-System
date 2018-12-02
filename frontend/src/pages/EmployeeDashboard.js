@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Table } from "reactstrap";
 import axios from "axios";
 import EmployeesTable from "../components/EmployeesTable";
+import '../styles/sass/pages/EmployeeDashboard.scss';
 import { getFromStorage } from "../utils/storage";
 
 export default class EmployeePage extends Component {

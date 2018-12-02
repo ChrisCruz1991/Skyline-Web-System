@@ -9,6 +9,7 @@ import ClientsDashboard from "../pages/ClientsDashboard";
 import ClientPage from "../pages/ClientPage";
 import EmployeeDashboard from "../pages/EmployeeDashboard";
 import EmployeePage from "../pages/EmployeePage";
+import Home from "../pages/Home";
 
 class Routes extends Component {
   render() {
@@ -26,6 +27,7 @@ class Routes extends Component {
               <Route path="/client/:id" component={ClientPage} />
               <Route path="/employees" component={EmployeeDashboard} />
               <Route path="/employee/:id" component={EmployeePage} />
+              <Route exact path="/" component={Home} />
             </Switch>
           </div>
         </div>
