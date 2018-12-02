@@ -9,6 +9,7 @@ import ClientsDashboard from "../pages/ClientsDashboard";
 import ClientPage from "../pages/ClientPage";
 import EmployeesDashboard from "../pages/EmployeesDashboard";
 import EmployeePage from "../pages/EmployeePage";
+import Home from "../pages/Home";
 import EmployeesForm from "../pages/EmployeesForm";
 import Membership from "../pages/Membership";
 
@@ -30,6 +31,7 @@ class Routes extends Component {
               <Route exact path="/employees" component={EmployeesDashboard} />
               <Route path="/employees/new" component={EmployeesForm} />
               <Route path="/employee/:id" component={EmployeePage} />
+              <Route exact path="/" component={Home} />
             </Switch>
           </div>
         </div>
