@@ -1,27 +1,11 @@
 import React, { Component } from "react";
-import { Table } from "reactstrap";
-import axios from "axios";
-import { getFromStorage } from "../utils/storage";
+import { Table, Row, Button } from "reactstrap";
 
-export default class CarsWithoutEmployee extends Component {
+export default class VehicleModalContent extends Component {
   state = {
-    vehicles: [],
-    isLoading: true,
     isClicked: false,
     clicked: ""
   };
-
-  componentDidMount() {
-    const { garage_id } = getFromStorage("object");
-    axios
-      .get("http://localhost:8080/api/vehicle/dashboard/" + garage_id)
-      .then(res =>
-        this.setState({
-          vehicles: res.data.filter(vehicle => vehicle.Status === 0),
-          isLoading: false
-        })
-      );
-  }
 
   handleClickedRow = id => {
     this.setState({
@@ -30,31 +14,43 @@ export default class CarsWithoutEmployee extends Component {
     });
   };
 
+  getVehicleId = () => {
+    this.props.assignVehicle(this.state.clicked);
+  };
+
   render() {
-    const vehicleClicked = this.state.vehicles.find(
+    const { vehicles } = this.props;
+
+    // to display the make and model of
+    // the vehicle selected
+    const vehicleClicked = vehicles.find(
       vehicle => vehicle.id === this.state.clicked
     );
+
+    // filter the vehicle list from garage
+    // with status === 0
+    const vehicleFilter = vehicles.filter(vehicle => vehicle.Status === 0);
+
     return (
-      <div style={{ overflow: "auto", height: "200px" }}>
-        <div>
-          {this.state.isClicked ? (
-            <h3>
-              Selected car is: {vehicleClicked.Make} {vehicleClicked.Model}{" "}
-            </h3>
-          ) : (
-            <h3>No Vehicle is clicked</h3>
-          )}
-        </div>
+      <Row>
+        {this.state.isClicked ? (
+          <h3>
+            Selected car is: {vehicleClicked.Make} {vehicleClicked.Model}
+          </h3>
+        ) : (
+          <h3>No Vehicle is selected</h3>
+        )}
         <Table hover striped>
           <thead>
             <tr>
               <th>Make</th>
               <th>Model</th>
               <th>Year</th>
+              <th>Color</th>
             </tr>
           </thead>
           <tbody>
-            {this.state.vehicles.map(vehicle => {
+            {vehicleFilter.map(vehicle => {
               return (
                 <tr
                   key={vehicle.id}
@@ -63,12 +59,21 @@ export default class CarsWithoutEmployee extends Component {
                   <td>{vehicle.Make}</td>
                   <td>{vehicle.Model}</td>
                   <td>{vehicle.Year}</td>
+                  <td style={{ textTransform: "capitalize" }}>
+                    {vehicle.Color}
+                  </td>
                 </tr>
               );
             })}
           </tbody>
         </Table>
-      </div>
+        <Row>
+          <Button color="info" onClick={this.getVehicleId}>
+            Assign Vehicle
+          </Button>
+          <Button color="danger">Cancel</Button>
+        </Row>
+      </Row>
     );
   }
 }
