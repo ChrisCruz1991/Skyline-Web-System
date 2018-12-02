@@ -37,7 +37,7 @@ export default class Dashboard extends Component {
         </p>
         <Table striped>
           <thead>
-            <tr>
+            <tr style={{ textAlign: "center" }}>
               <th>Client</th>
               <th>Make</th>
               <th>Model</th>

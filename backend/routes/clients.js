@@ -65,4 +65,54 @@ router.get("/client/:id", (req, res) => {
   );
 });
 
+/*
+  POST data for new client
+*/
+
+router.post("/client/new", (req, res) => {
+  const { first_name, last_name, email, phone, address } = req.body;
+
+  pool.query("SELECT * FROM CLIENT WHERE email = ?", email, (err, result) => {
+    if (err) {
+      return res.send({
+        success: false,
+        code: 500,
+        message: "ERROR! ",
+        err
+      });
+    } else {
+      if (result.length > 0) {
+        return res.send({
+          success: false,
+          code: 204,
+          message: "Error: client already exists"
+        });
+      } else {
+        // insert new client
+        const INSERT_QUERY = `INSERT INTO CLIENT
+        (first_name, last_name, phone, email, address)
+        VALUES ?`;
+        const VALUES = [[first_name, last_name, phone, email, address]];
+
+        pool.query(INSERT_QUERY, [VALUES], (err, result) => {
+          if (err) {
+            return res.send({
+              success: false,
+              code: 500,
+              message: "ERROR! ",
+              err
+            });
+          } else {
+            return res.send({
+              success: true,
+              code: 200,
+              message: "Client added!"
+            });
+          }
+        });
+      }
+    }
+  });
+});
+
 module.exports = router;

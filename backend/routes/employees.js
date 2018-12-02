@@ -41,6 +41,7 @@ router.get("/employee/:id", (req, res) => {
       }
       const list_vehicles = result.map(item => {
         return {
+          id: item.vehicle_id,
           Make: item.make,
           Model: item.model,
           Color: item.color,
@@ -49,13 +50,65 @@ router.get("/employee/:id", (req, res) => {
       });
       res.json({
         id: result[0].employee_id,
-        vehicle_id: result[0].vehicle_id,
         name: `${result[0].first_name} ${result[0].last_name}`,
         phone: result[0].phone,
         address: result[0].address,
         role: result[0].role,
-        vehicles: list_vehicles
+        vehicle_list: list_vehicles
       });
+    }
+  );
+});
+
+/*
+  router post to insert new employee
+  for your specific garage
+*/
+
+router.post("/employee/new", (req, res) => {
+  const { first_name, last_name, phone, address, garage_id } = req.body;
+
+  // Make sure employee doesn't exists first
+  pool.query(
+    "SELECT * FROM EMPLOYEE WHERE first_name = ?",
+    first_name,
+    (err, result) => {
+      if (err) {
+        return res.send({
+          success: false,
+          message: "error in server",
+          err
+        });
+      } else {
+        if (result.length > 0) {
+          return res.send({
+            success: false,
+            message: "Employee already exist"
+          });
+        } else {
+          const INSERT_QUERY = `INSERT INTO EMPLOYEE
+          (first_name, last_name, phone, address, role, GARAGE_garage_id)
+          VALUES ?`;
+          const VALUES = [
+            [first_name, last_name, phone, address, "mechanic", garage_id]
+          ];
+
+          pool.query(INSERT_QUERY, [VALUES], (err, result) => {
+            if (err) {
+              return res.send({
+                success: false,
+                message: "Error in server",
+                err
+              });
+            } else {
+              return res.send({
+                success: true,
+                message: "Created new employee!"
+              });
+            }
+          });
+        }
+      }
     }
   );
 });
