@@ -23,7 +23,7 @@ export default class Header extends Component {
   render() {
     return (
       <header className="header">
-        <Navbar className="fixed-top" color="dark" light expand="md">
+        <Navbar color="dark" light expand="md">
         <div className="d-flex align-items-center mr-2"><img src="images/skyline.png" alt="logo" width="60"/>  </div>
           <NavbarBrand className="text-white">Skyline Web-Systems</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
