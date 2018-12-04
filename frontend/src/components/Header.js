@@ -51,8 +51,8 @@ export default class Header extends Component {
                 </Link>
               </NavItem>
               <NavItem className="my-auto mx-2">
-                <Link to="/dashboard" className="text-white my-3">
-
+                <Link to="/dashboard" className="text-white my-3" />
+              </NavItem>
               <NavItem>
                 <Link to="/vehicle" className="text-white my-3">
                   Dashboard
