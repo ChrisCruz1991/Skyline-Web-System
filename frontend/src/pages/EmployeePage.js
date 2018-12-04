@@ -47,7 +47,7 @@ export default class EmployeePage extends Component {
       })
       .then(res => {
         if (res.data.success) {
-          this.props.history.push("/dashboard");
+          this.props.history.push("/");
         }
       })
       .catch(error => {

@@ -1,11 +1,33 @@
 import React, { Component } from "react";
-import { Col, Button, Form, FormGroup, Label, Input, Row } from "reactstrap";
 import axios from "axios";
+import {
+  Col,
+  Button,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  Row,
+  Container,
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem
+} from "reactstrap";
 
-export default class Vehicle extends Component {
+const STATUS = {
+  0: "Unattended",
+  1: "Attending",
+  2: "Ready"
+};
+
+export default class VehiclePage extends Component {
   state = {
     vehicle: [],
-    isLoading: true
+    isLoading: true,
+    dropdownOpen: false,
+    status: "",
+    displayText: null
   };
 
   componentDidMount() {
@@ -13,10 +35,60 @@ export default class Vehicle extends Component {
     axios.get(`http://localhost:8080/api/vehicle/${id}`).then(res =>
       this.setState({
         vehicle: res.data,
+        status: STATUS[res.data.data.status],
         isLoading: false
       })
     );
   }
+
+  toggle = e => {
+    console.log(e.target.value);
+    this.setState(prevState => ({
+      dropdownOpen: !prevState.dropdownOpen
+    }));
+  };
+
+  onChange = e => {
+    this.setState({
+      status: e.target.innerText
+    });
+  };
+
+  onItemSelect = e => {
+    this.setState({
+      status: e.target.innerText
+    });
+  };
+
+  OkButtonSubmit = () => {
+    const { vehicle_id } = this.state.vehicle.data;
+    const STATUS_TO_NUMBER = {
+      Unattended: 0,
+      Attending: 1,
+      Ready: 2
+    };
+
+    const newStatusText = this.state.status;
+
+    // Change the work from 'status' into
+    // a number
+    const newStatusNum = STATUS_TO_NUMBER[newStatusText];
+
+    // post request
+    axios
+      .post("http://localhost:8080/api/vehicle/status", {
+        status: newStatusNum,
+        vehicle_id: vehicle_id
+      })
+      .then(res => {
+        if (res.data.code === 200) {
+          this.setState({
+            successMessage: "Successfully updated vehicle status!",
+            displayText: true
+          });
+        }
+      });
+  };
 
   render() {
     const { vehicle, isLoading } = this.state;
@@ -24,97 +96,88 @@ export default class Vehicle extends Component {
     if (isLoading) {
       return <p>Loading...</p>;
     }
+    const {
+      client_name,
+      client_last_name,
+      make,
+      model,
+      color,
+      year,
+      license_plate
+    } = vehicle.data;
+
     return (
-      <div>
+      <Container>
         <Row>
-          <div className="px-4 mt-3 col-md-6">
-            <Form className="">
-              <FormGroup className="" row>
-                <Label for="make" md={2} className="">
-                  Make:
-                </Label>
-                <Col md={10}>
-                  <Input
-                    type="text"
-                    name="make"
-                    value={vehicle[0].make}
-                    disabled
-                  />
-                </Col>
-              </FormGroup>
-              <FormGroup className="" row>
-                <Label md={2} for="model" className="">
-                  Model:
-                </Label>
-                <Col md={10}>
-                  <Input
-                    type="text"
-                    name="model"
-                    value={vehicle[0].model}
-                    disabled
-                  />
-                </Col>
-              </FormGroup>
-              <FormGroup className="" row>
-                <Label md={2} for="year" className="">
-                  Year:
-                </Label>
-                <Col md={10}>
-                  <Input
-                    type="text"
-                    name="year"
-                    value={vehicle[0].year}
-                    disabled
-                  />
-                </Col>
-              </FormGroup>
-              <FormGroup row className="">
-                <Label md={2} for="color" className="">
-                  Color:
-                </Label>
-                <Col md={10}>
-                  <Input
-                    type="text"
-                    name="color"
-                    value={vehicle[0].color}
-                    disabled
-                  />
-                </Col>
-              </FormGroup>
-              <FormGroup row className="">
-                <Label md={2} for="license_plate" className="">
-                  License Plate:
-                </Label>
-                <Col md={10}>
-                  <Input
-                    type="text"
-                    name="model"
-                    value={vehicle[0].license_plate}
-                    disabled
-                  />
-                </Col>
-              </FormGroup>
-              <FormGroup row className="">
-                <Label md={2} for="status" className="">
-                  Status:
-                </Label>
-                <Col md={10}>
-                  <Input
-                    type="text"
-                    name="model"
-                    value={vehicle[0].status}
-                    disabled
-                  />
-                </Col>
-              </FormGroup>
-              <Button>Edit</Button>
-            </Form>
-          </div>
-          <div className="px-4 mt-3 col-md-6">
-            <h3>Please Funciona</h3>
-          </div>
+          <h2>
+            Client: {client_name} {client_last_name}
+          </h2>
         </Row>
-      </div>
+        <Row>
+          <Col>
+            <Form>
+              <FormGroup>
+                <Label htmlFor="make">Make:</Label>
+                <Input value={make} name="make" type="text" disabled />
+              </FormGroup>
+              <FormGroup>
+                <Label htmlFor="model">Model:</Label>
+                <Input value={model} type="text" name="model" disabled />
+              </FormGroup>
+              <FormGroup>
+                <Label htmlFor="year">Year:</Label>
+                <Input value={year} type="text" name="year" disabled />
+              </FormGroup>
+              <FormGroup>
+                <Label htmlFor="color">Color:</Label>
+                <Input value={color} type="text" name="color" disabled />
+              </FormGroup>
+              <FormGroup>
+                <Label htmlFor="license_plate">License Plate:</Label>
+                <Input
+                  value={license_plate}
+                  type="text"
+                  name="license_plate"
+                  disabled
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label htmlFor="status">Status:</Label>
+                <Input
+                  onChange={this.onChange}
+                  value={this.state.status}
+                  type="text"
+                  name="status"
+                />
+              </FormGroup>
+              <FormGroup>
+                <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+                  <DropdownToggle color="info" caret>
+                    {this.state.status || "Status"}
+                  </DropdownToggle>
+                  <DropdownMenu>
+                    <DropdownItem onClick={this.onItemSelect}>
+                      Unattended
+                    </DropdownItem>
+                    <DropdownItem onClick={this.onItemSelect}>
+                      Attending
+                    </DropdownItem>
+                    <DropdownItem onClick={this.onItemSelect}>
+                      Ready
+                    </DropdownItem>
+                  </DropdownMenu>
+                </Dropdown>
+              </FormGroup>
+            </Form>
+            <Button color="success" onClick={this.OkButtonSubmit}>
+              Ok
+            </Button>
+            {this.state.displayText && (
+              <div className="text-success">{this.state.successMessage}</div>
+            )}
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }
