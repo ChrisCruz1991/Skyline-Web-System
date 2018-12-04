@@ -39,8 +39,8 @@ export default class ClientPage extends Component {
     console.log(vehicles);
 
     /*
-      Need fixing and styling, but
-      receives information properly
+  Need fixing and styling, but
+  receives information properly
     */
     return (
       <Container style={{ paddingTop: "20px" }}>

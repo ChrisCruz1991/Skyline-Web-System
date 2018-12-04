@@ -7,23 +7,25 @@ import { getFromStorage } from "../utils/storage";
 export default class Dashboard extends Component {
   state = {
     vehicles: [],
-    isLoading: true
+    isLoading: true,
+    garageName: ""
   };
 
   componentDidMount() {
-    const { garage_id } = getFromStorage("object");
+    const { garage_id, garage_name } = getFromStorage("object");
     axios
       .get("http://localhost:8080/api/vehicle/dashboard/" + garage_id)
       .then(res =>
         this.setState({
           vehicles: res.data,
-          isLoading: false
+          isLoading: false,
+          garageName: garage_name
         })
       );
   }
 
   render() {
-    const { vehicles, isLoading } = this.state;
+    const { vehicles, garageName, isLoading } = this.state;
 
     if (isLoading) {
       return <p>Loading data...</p>;
@@ -31,19 +33,23 @@ export default class Dashboard extends Component {
 
     return (
       <div className="App">
-        <h2 className="text-center pt-3">This is all the vehicles in garage</h2>
-        <p className="text-center pb-3">
-          Click on the links to be taken to a different part of the app!
+        <h2 className="text-center pt-3">{garageName} | WORKSHOP</h2>
+        <p className="text-center">
+          Theres {vehicles.length} vehicles in the workshop.
         </p>
         <Table striped>
           <thead>
-            <tr style={{ textAlign: "center" }}>
-              <th>Client</th>
-              <th>Make</th>
-              <th>Model</th>
-              <th>Year</th>
-              <th>Color</th>
-              <th>Status</th>
+            <tr
+              style={{
+                textAlign: "center"
+              }}
+            >
+              <th>CLIENT</th>
+              <th>MAKE</th>
+              <th>MODEL</th>
+              <th>YEAR</th>
+              <th>COLOR</th>
+              <th>STATUS</th>
             </tr>
           </thead>
           <tbody>

@@ -1,42 +1,8 @@
-.wrapper {
-    display: flex;
-}
-
-.menu {
-    background-color: #212529;
-    height: 42.3rem;
-    width: 14rem;
-    
-}
-
-.nav {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    color: white;
-
-    & > li {
-        height: 3rem;
-        text-align: center;
-
-        & > a {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            
-
-            & > span {
-                vertical-align: center;
-            }
-            
-        }
-    }
-}
-
 .App {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
+}
+
+.navbar-toggler-icon {
+  color: white;
 }

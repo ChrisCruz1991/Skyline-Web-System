@@ -2,7 +2,8 @@ import React from "react";
 import { Form, FormGroup, Label, Input } from "reactstrap";
 
 const GarageForm = props => (
-  <Form>
+  <Form className="text-white">
+    <h2 className="text-white">Garage</h2>
     <FormGroup>
       <Label htmlFor="garage_name">Garage Name:</Label>
       <Input

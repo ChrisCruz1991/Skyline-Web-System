@@ -22,3 +22,30 @@
 
 @import "layout/menu";
 @import "pages/ClientDashboard";
+
+.login_backgound {
+  background-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.2),
+      rgba(0, 0, 0, 0.2)
+    ),
+    url("../../images/pistons.jpeg");
+  background-size: cover;
+  background-position: center;
+}
+
+.signUp_background {
+  background-image: linear-gradient(
+      to right,
+      rgba(36, 162, 182, 0.3),
+      rgba(124, 156, 161, 0.23)
+    ),
+    url("https://cdn.pixabay.com/photo/2015/09/16/20/11/garage-943249_1280.jpg");
+  opacity: 0.9;
+  background-size: cover;
+  background-position: center;
+}
+
+#root {
+  height: 100vh;
+}

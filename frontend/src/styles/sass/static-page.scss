@@ -4,17 +4,8 @@
 @import "libs/vendor";
 @import "libs/breakpoints";
 @import "libs/html-grid";
-// @import url("font-awesome.min.css");
-// @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,400,400italic,600,600italic,700,700italic");
-
-/*
-	Directive by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
-*/
 
 // Breakpoints.
-
 @include breakpoints(
   (
     wide: (
@@ -47,106 +38,13 @@
 // Reset.
 // Based on meyerweb.com/eric/tools/css/reset (v2.0 | 20110126 | License: public domain)
 
-html,
-body,
-div,
-span,
-applet,
-object,
-iframe,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-blockquote,
-pre,
-a,
-abbr,
-acronym,
-address,
-big,
-cite,
-code,
-del,
-dfn,
-em,
-img,
-ins,
-kbd,
-q,
-s,
-samp,
-small,
-strike,
-strong,
-sub,
-sup,
-tt,
-var,
-b,
-u,
-i,
-center,
-dl,
-dt,
-dd,
-ol,
-ul,
-li,
-fieldset,
-form,
-label,
-legend,
-table,
-caption,
-tbody,
-tfoot,
-thead,
-tr,
-th,
-td,
-article,
-aside,
-canvas,
-details,
-embed,
-figure,
-figcaption,
-footer,
-header,
-hgroup,
-menu,
-nav,
-output,
-ruby,
-section,
-summary,
-time,
-mark,
-audio,
-video {
+* {
   margin: 0;
   padding: 0;
   border: 0;
   font: inherit;
   vertical-align: baseline;
-}
-
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-menu,
-nav,
-section {
-  display: block;
+  box-sizing: border-box;
 }
 
 body {
@@ -156,22 +54,6 @@ body {
 ol,
 ul {
   list-style: none;
-}
-
-blockquote,
-q {
-  quotes: none;
-
-  &:before,
-  &:after {
-    content: "";
-    content: none;
-  }
-}
-
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
 }
 
 body {
@@ -197,39 +79,6 @@ textarea {
   appearance: none;
 }
 
-/* Basic */
-
-// Set box model to border-box.
-// Based on css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice
-html {
-  box-sizing: border-box;
-}
-
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
-}
-
-html,
-body {
-  height: 100%;
-}
-
-body {
-  background: _palette(bg);
-
-  // Stops initial animations until page loads.
-  &.is-preload {
-    *,
-    *:before,
-    *:after {
-      @include vendor("animation", "none !important");
-      @include vendor("transition", "none !important");
-    }
-  }
-}
-
 body,
 input,
 select,
@@ -250,18 +99,6 @@ a {
   text-decoration: none;
 }
 
-strong,
-b {
-  font-weight: 600;
-  color: _palette(fg-bold);
-}
-
-em,
-i {
-  font-style: italic;
-}
-
-p,
 ul,
 ol,
 dl,
@@ -323,77 +160,6 @@ blockquote {
   padding: 1em 0 1em 2em;
 }
 
-/* Container */
-
-// .container {
-//   margin: 0 auto;
-//   max-width: 100%;
-//   width: 51em;
-
-//   &.medium {
-//     width: (51em * 0.75);
-//   }
-
-//   @include breakpoint("<=normal") {
-//     width: 48em;
-
-//     &.medium {
-//       width: (48em * 0.75);
-//     }
-//   }
-
-//   @include breakpoint("<=narrow") {
-//     width: 95%;
-
-//     &.medium {
-//       width: (95% * 0.75);
-//     }
-//   }
-
-//   @include breakpoint("<=narrower") {
-//     width: 95% !important;
-//   }
-
-//   @include breakpoint("<=mobile") {
-//     width: 90% !important;
-//   }
-
-//   @include breakpoint("<=mobilep") {
-//     width: 100% !important;
-//   }
-// }
-
-// /* Row */
-
-// .row {
-//   @include html-grid((30px, 30px));
-
-//   @include breakpoint("<=wide") {
-//     @include html-grid((30px, 30px), "wide");
-//   }
-
-//   @include breakpoint("<=normal") {
-//     @include html-grid((30px, 30px), "normal");
-//   }
-
-//   @include breakpoint("<=narrow") {
-//     @include html-grid((30px, 30px), "narrow");
-//   }
-
-//   @include breakpoint("<=narrower") {
-//     @include html-grid((20px, 20px), "narrower");
-//   }
-
-//   @include breakpoint("<=mobile") {
-//     @include html-grid((20px, 230px), "mobile");
-//   }
-
-//   @include breakpoint("<=mobilep") {
-//     @include html-grid((20px, 20px), "mobilep");
-//   }
-// }
-
-/* Section/Article */
 
 section,
 article {
@@ -504,19 +270,6 @@ footer {
   }
 }
 
-/* Form */
-
-label {
-  display: block;
-  color: _palette(fg-bold);
-  font-size: 0.8em;
-  font-weight: 700;
-  letter-spacing: 0.125em;
-  line-height: 1.75em;
-  text-transform: uppercase;
-  margin: 0 0 0.5em 0;
-}
-
 input[type="text"],
 input[type="password"],
 input[type="email"],
@@ -547,32 +300,6 @@ input[type="password"],
 input[type="email"],
 select {
   line-height: 1em;
-}
-
-select {
-  background-image: svg-url(
-    "<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' preserveAspectRatio='none' viewBox='0 0 40 40'><path d='M9.4,12.3l10.4,10.4l10.4-10.4c0.2-0.2,0.5-0.4,0.9-0.4c0.3,0,0.6,0.1,0.9,0.4l3.3,3.3c0.2,0.2,0.4,0.5,0.4,0.9 c0,0.4-0.1,0.6-0.4,0.9L20.7,31.9c-0.2,0.2-0.5,0.4-0.9,0.4c-0.3,0-0.6-0.1-0.9-0.4L4.3,17.3c-0.2-0.2-0.4-0.5-0.4-0.9 c0-0.4,0.1-0.6,0.4-0.9l3.3-3.3c0.2-0.2,0.5-0.4,0.9-0.4S9.1,12.1,9.4,12.3z' fill='#{_palette(border)}' /></svg>"
-  );
-  background-size: 1.25em;
-  background-repeat: no-repeat;
-  background-position: calc(100% - 1em) center;
-  padding-right: 1.5em;
-  text-overflow: ellipsis;
-
-  option {
-    color: _palette(fg-bold);
-    background: _palette(bg);
-  }
-
-  &:focus {
-    &::-ms-value {
-      background-color: transparent;
-    }
-  }
-
-  &::-ms-expand {
-    display: none;
-  }
 }
 
 textarea {
@@ -623,15 +350,6 @@ textarea {
 
   img {
     display: block;
-  }
-
-  &.fit {
-    display: block;
-
-    img {
-      display: block;
-      width: 100%;
-    }
   }
 
   &.feature {
@@ -694,7 +412,6 @@ span.image.icon {
 }
 
 /* List */
-
 ol {
   &.default {
     list-style: decimal;
@@ -817,145 +534,9 @@ ul.actions {
   }
 }
 
-/* Icons */
-
-ul.icons {
-  cursor: default;
-
-  li {
-    display: inline-block;
-    font-size: 1.25em;
-    line-height: 1em;
-    padding-left: 0.5em;
-
-    &:first-child {
-      padding-left: 0;
-    }
-
-    a,
-    span {
-      @include vendor("transition", "background-color 0.2s ease-in-out");
-      border-radius: 100%;
-      border: solid 1px _palette(border);
-      display: inline-block;
-      height: 2em;
-      line-height: 2em;
-      text-align: center;
-      width: 2em;
-
-      &:hover {
-        background: _palette(border-bg);
-      }
-    }
-  }
-}
-
-/* Table */
-
-.table-wrapper {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-table {
-  width: 100%;
-
-  &.default {
-    width: 100%;
-
-    tbody {
-      tr {
-        border-bottom: solid 1px _palette(border);
-
-        &:nth-child(2n - 1) {
-          background: _palette(border-bg);
-        }
-      }
-    }
-
-    td {
-      padding: 0.5em 1em 0.5em 1em;
-    }
-
-    th {
-      color: _palette(fg-bold);
-      font-size: 0.8em;
-      font-weight: 700;
-      letter-spacing: 0.125em;
-      line-height: 1.75em;
-      padding: 0.5em 1em 0.5em 1em;
-      text-align: left;
-      text-transform: uppercase;
-    }
-
-    thead {
-      border-bottom: solid 1px _palette(border);
-    }
-  }
-}
-
-/* Button */
-
-input[type="submit"],
-input[type="reset"],
-input[type="button"],
-.button {
-  @include vendor("appearance", "none");
-  @include vendor(
-    "transition",
-    ("color 0.2s ease-in-out", "background-color 0.2s ease-in-out")
-  );
-  background: _palette(accent2, bg);
-  border-radius: _size(border-radius);
-  border: 0;
-  color: _palette(accent2, fg-bold);
-  cursor: pointer;
-  display: inline-block;
-  font-size: 0.9em;
-  font-weight: 700;
-  letter-spacing: 0.125em;
-  line-height: 3.25em;
-  min-width: 15em;
-  padding: 0 1.5em;
-  text-align: center;
-  text-decoration: none;
-  text-transform: uppercase;
-
-  &:hover {
-    background: lighten(_palette(accent2, bg), 10);
-  }
-
-  &:active {
-    background: darken(_palette(accent2, bg), 5);
-  }
-
-  &.alt {
-    background: none;
-    box-shadow: inset 0 0 0 1px _palette(border);
-    color: _palette(accent2, bg);
-
-    &:hover {
-      background: _palette(border-bg);
-    }
-
-    &:active {
-      background: _palette(border-bg2);
-    }
-  }
-
-  &.fit {
-    width: 100%;
-  }
-
-  &.small {
-    font-size: 0.8em;
-  }
-}
-
 /* Box */
 
 .box {
-  background: _palette(bg);
   border: solid 1px _palette(border);
   margin-bottom: 6em;
   padding: 3.5em;
@@ -1002,7 +583,6 @@ input[type="button"],
   }
 
   &:before {
-    background: blue;
     content: "";
     display: inline-block;
     height: 100%;
@@ -1125,14 +705,6 @@ input[type="button"],
     color: _palette(accent2, fg-bold);
   }
 
-  input[type="submit"],
-  input[type="reset"],
-  input[type="button"],
-  .button {
-    background: _palette(accent2, fg-bold);
-    color: _palette(accent2, bg);
-  }
-
   .logo {
     // background: _palette(accent1, bg);
     background-image: url(/images/skyline.png);
@@ -1165,149 +737,6 @@ input[type="button"],
     line-height: 1.5em;
     margin: 0.25em 0 0 0;
     text-shadow: 1px 2px 3px black;
-  }
-}
-
-/* Footer */
-
-#footer {
-  background-attachment: scroll;
-  background-color: _palette(accent1, bg);
-  background-image: url("/images/bottom-3200.svg");
-  background-position: top center;
-  background-repeat: repeat-x;
-  background-size: 3200px 460px;
-  color: _palette(accent1, fg);
-
-  /*
-			Since the SVG background occupies a lot of vertical space, we'll
-			add additional top padding (to move our content out of its way)
-			and a negative margin (to move everything up a bit).
-		*/
-  margin-top: -260px;
-  padding: calc(460px + 6em) 0 10em 0;
-
-  position: relative;
-  text-align: center;
-
-  &:before {
-    background: _palette(border);
-    content: "";
-    height: calc(460px + 6em);
-    left: 50%;
-    position: absolute;
-    top: 0;
-    width: 1px;
-    z-index: 0;
-  }
-
-  a {
-    color: _palette(accent1, fg-bold);
-  }
-
-  strong,
-  b {
-    color: _palette(accent1, fg-bold);
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    color: _palette(accent1, fg-bold);
-  }
-
-  header {
-    p {
-      color: _palette(accent1, fg-light);
-    }
-  }
-
-  input[type="submit"],
-  input[type="reset"],
-  input[type="button"],
-  .button {
-    background: _palette(accent1, fg-bold);
-    box-shadow: inset 0 0 0 1px _palette(accent1, fg-bold);
-    color: _palette(accent1, bg);
-
-    &:hover {
-      background: _palette(border-bg);
-      color: _palette(accent1, fg-bold);
-    }
-  }
-
-  input[type="text"],
-  input[type="password"],
-  input[type="email"],
-  select,
-  textarea {
-    &:focus {
-      border-color: _palette(accent1, fg-bold);
-    }
-  }
-
-  .formerize-placeholder {
-    color: transparentize(_palette(accent1, fg), 0.5) !important;
-  }
-
-  form {
-    margin: 3em 0;
-  }
-
-  .copyright {
-    color: _palette(accent1, fg-light);
-    font-size: 0.8em;
-    line-height: 1em;
-    margin: 3em 0 0 0;
-
-    li {
-      border-left: dotted 1px;
-      display: inline-block;
-      margin-left: 1em;
-      padding-left: 1em;
-
-      &:first-child {
-        padding: 0;
-        margin: 0;
-        border: 0;
-      }
-
-      a,
-      span {
-        color: inherit;
-
-        &:hover {
-          color: _palette(accent1, fg-bold);
-        }
-      }
-    }
-  }
-}
-
-/* Main */
-
-#main {
-  padding: 6em 0 5em 0;
-  position: relative;
-  z-index: 1;
-
-  &:before {
-    background: _palette(border);
-    content: "";
-    height: 100%;
-    left: 50%;
-    position: absolute;
-    top: 0;
-    width: 1px;
-    z-index: -1;
-  }
-
-  header.major,
-  footer.major {
-    background: _palette(bg);
   }
 }
 
