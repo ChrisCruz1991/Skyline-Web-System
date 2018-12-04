@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import UserLoginForm from "../components/UserLoginForm";
-import { Button } from "reactstrap";
+import { Button, Container } from "reactstrap";
 import { setInStorage } from "../utils/storage";
 
 export default class LoginPage extends Component {
@@ -41,23 +41,40 @@ export default class LoginPage extends Component {
 
   render() {
     return (
-      <div>
-        <h2 style={{ textAlign: "center" }}>Login Page</h2>
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <UserLoginForm
-            onEmailChange={this.onEmailChange}
-            onPasswordChange={this.onPasswordChange}
-          />
-        </div>
-        <div
+      <div className="login_backgound text-white">
+        <Container
+          className="d-flex justify-content-center align-items-center"
           style={{
-            display: "flex",
-            justifyContent: "center"
+            borderRadius: "10px",
+            height: "93vh"
           }}
         >
-          <Button>Cancel</Button>
-          <Button onClick={this.onLogInClick}>Log In</Button>
-        </div>
+          <div className="d-block">
+            <div className="d-flex justify-content-center align-items-center">
+              <div className="d-block" style={{ height: "500px" }}>
+                <h2 style={{ textAlign: "center", color: "white" }}>
+                  Login Page
+                </h2>
+                <UserLoginForm
+                  onEmailChange={this.onEmailChange}
+                  onPasswordChange={this.onPasswordChange}
+                />
+                <div>
+                  <Button className="mx-5" color="danger">
+                    Cancel
+                  </Button>
+                  <Button
+                    className="mx-5"
+                    color="success"
+                    onClick={this.onLogInClick}
+                  >
+                    Log In
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Container>
       </div>
     );
   }

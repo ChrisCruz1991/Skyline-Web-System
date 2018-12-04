@@ -72,19 +72,39 @@ export default class SignupPage extends Component {
     }
 
     return (
-      <div>
-        <h2 style={{ textAlign: "center" }}>Register Form</h2>
+      <div className="signUp_background">
+        <h2 className="text-white" style={{ textAlign: "center" }}>
+          Register Form
+        </h2>
         <div
           style={{
             display: "flex",
-            justifyContent: "center",
-            alignItems: "space-between"
+            justifyContent: "center"
           }}
         >
-          <GarageForm onChange={this.onChange} />
-          <UserForm onChange={this.onChange} />
+          <div
+            className="mr-5 p-3"
+            style={{
+              backgroundColor: "rgba(128, 128, 128, .9)",
+              width: "500px",
+              borderRadius: "13px"
+            }}
+          >
+            <GarageForm onChange={this.onChange} />
+          </div>
+          <div
+            className="ml-5 p-3"
+            style={{
+              backgroundColor: "rgba(128, 128, 128, .9)",
+              width: "500px",
+              borderRadius: "13px"
+            }}
+          >
+            <UserForm onChange={this.onChange} />
+          </div>
         </div>
         <div
+          className="my-3 pb-3"
           style={{
             display: "flex",
             justifyContent: "space-around"

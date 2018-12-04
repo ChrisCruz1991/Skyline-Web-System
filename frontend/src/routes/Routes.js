@@ -9,6 +9,7 @@ import ClientsDashboard from "../pages/ClientsDashboard";
 import ClientPage from "../pages/ClientPage";
 import EmployeesDashboard from "../pages/EmployeesDashboard";
 import EmployeePage from "../pages/EmployeePage";
+import Home from "../pages/Home";
 import EmployeesForm from "../pages/EmployeesForm";
 import Membership from "../pages/Membership";
 
@@ -16,9 +17,9 @@ class Routes extends Component {
   render() {
     return (
       <Router>
-        <div>
+        <div style={{ height: "100vh" }}>
           <Header />
-          <div className="app">
+          <div className="app" style={{ backgroundColor: "#f4f7f8" }}>
             <Switch>
               <Route exact path="/dashboard" component={Dashboard} />
               <Route path="/signup" component={SignupPage} />
@@ -30,6 +31,7 @@ class Routes extends Component {
               <Route exact path="/employees" component={EmployeesDashboard} />
               <Route path="/employees/new" component={EmployeesForm} />
               <Route path="/employee/:id" component={EmployeePage} />
+              <Route exact path="/" component={Home} />
             </Switch>
           </div>
         </div>

@@ -32,8 +32,8 @@ export default class ClientPage extends Component {
     const { vehicles } = client;
 
     /*
-      Need fixing and styling, but
-      receives information properly
+  Need fixing and styling, but
+  receives information properly
     */
     return (
       <div>

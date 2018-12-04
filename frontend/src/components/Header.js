@@ -14,6 +14,8 @@ export default class Header extends Component {
   state = {
     isOpen: false,
     name: "",
+    lastName: "",
+    garageName: "",
     isLoading: true
   };
 
@@ -22,28 +24,33 @@ export default class Header extends Component {
   };
 
   componentDidMount() {
-    const { employee_name } = getFromStorage("object");
+    const { employee_name, employee_last_name, garage_name } = getFromStorage(
+      "object"
+    );
+    console.log(getFromStorage("object"));
     this.setState({
-      name: employee_name
+      name: employee_name,
+      lastName: employee_last_name,
+      garageName: garage_name
     });
   }
 
   render() {
-    const { name, isLoading } = this.state;
+    const { name, lastName, garageName, isLoading } = this.state;
 
     return (
       <header className="header">
-        <Navbar color="dark" light expand="md">
+        <Navbar expand="md" light className="bg-info">
           <NavbarBrand className="text-white">Skyline Web-Systems</NavbarBrand>
-          <NavbarToggler onClick={this.toggle} />
-          <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="ml-auto" navbar>
+          <NavbarToggler className="text-white" onClick={this.toggle} />
+          <Collapse className="text-white" isOpen={this.state.isOpen} navbar>
+            <Nav className="ml-auto " navbar>
               <NavItem className="my-auto mx-2">
                 <Link to="/" className="text-white my-3">
                   Home
                 </Link>
               </NavItem>
-              <NavItem>
+              <NavItem className="my-auto mx-2">
                 <Link to="/dashboard" className="text-white my-3">
                   Dashboard
                 </Link>
@@ -73,9 +80,19 @@ export default class Header extends Component {
                   Log In
                 </Link>
               </NavItem>
-              <NavItem className="my-auto mx-2 text-white">
-                {name}
-                's Garage
+              <NavItem className=" mx-2 text-white">
+                <span
+                  className="bg-danger"
+                  style={{
+                    margin: "0",
+                    padding: "0",
+                    padding: "12px",
+                    borderRadius: "50%"
+                  }}
+                >
+                  {name[0]}
+                  {lastName[0]}
+                </span>
               </NavItem>
             </Nav>
           </Collapse>

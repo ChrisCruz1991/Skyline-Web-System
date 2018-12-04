@@ -2,10 +2,12 @@ import React from "react";
 import { Form, FormGroup, Label, Input } from "reactstrap";
 
 const UserForm = props => (
-  <Form>
+  <Form className="text-white">
+    <h2 className="text-white">Manager</h2>
     <FormGroup>
       <Label for="first_name">First Name:</Label>
       <Input
+        style={{ color: "white" }}
         onChange={props.onChange}
         type="text"
         name="first_name"
@@ -15,6 +17,7 @@ const UserForm = props => (
     <FormGroup>
       <Label for="last_name">Last Name:</Label>
       <Input
+        style={{ color: "white" }}
         onChange={props.onChange}
         type="text"
         name="last_name"
@@ -24,6 +27,7 @@ const UserForm = props => (
     <FormGroup>
       <Label for="email">Email:</Label>
       <Input
+        style={{ color: "white" }}
         onChange={props.onChange}
         type="text"
         name="email"
@@ -33,6 +37,7 @@ const UserForm = props => (
     <FormGroup>
       <Label for="password">Password:</Label>
       <Input
+        style={{ color: "white" }}
         onChange={props.onChange}
         type="password"
         name="password"
@@ -42,6 +47,7 @@ const UserForm = props => (
     <FormGroup>
       <Label for="phone">Phone:</Label>
       <Input
+        style={{ color: "white" }}
         onChange={props.onChange}
         type="text"
         name="phone"
@@ -51,6 +57,7 @@ const UserForm = props => (
     <FormGroup>
       <Label for="address">Address:</Label>
       <Input
+        style={{ color: "white" }}
         onChange={props.onChange}
         type="text"
         name="address"
