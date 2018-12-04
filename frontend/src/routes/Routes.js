@@ -17,9 +17,9 @@ class Routes extends Component {
   render() {
     return (
       <Router>
-        <div>
+        <div style={{ height: "100vh" }}>
           <Header />
-          <div className="app">
+          <div className="app" style={{ backgroundColor: "#f4f7f8" }}>
             <Switch>
               <Route exact path="/dashboard" component={Dashboard} />
               <Route path="/signup" component={SignupPage} />
