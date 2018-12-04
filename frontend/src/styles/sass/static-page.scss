@@ -131,7 +131,6 @@ video {
   margin: 0;
   padding: 0;
   border: 0;
-  font-size: 100%;
   font: inherit;
   vertical-align: baseline;
 }
@@ -326,73 +325,73 @@ blockquote {
 
 /* Container */
 
-.container {
-  margin: 0 auto;
-  max-width: 100%;
-  width: 51em;
+// .container {
+//   margin: 0 auto;
+//   max-width: 100%;
+//   width: 51em;
 
-  &.medium {
-    width: (51em * 0.75);
-  }
+//   &.medium {
+//     width: (51em * 0.75);
+//   }
 
-  @include breakpoint("<=normal") {
-    width: 48em;
+//   @include breakpoint("<=normal") {
+//     width: 48em;
 
-    &.medium {
-      width: (48em * 0.75);
-    }
-  }
+//     &.medium {
+//       width: (48em * 0.75);
+//     }
+//   }
 
-  @include breakpoint("<=narrow") {
-    width: 95%;
+//   @include breakpoint("<=narrow") {
+//     width: 95%;
 
-    &.medium {
-      width: (95% * 0.75);
-    }
-  }
+//     &.medium {
+//       width: (95% * 0.75);
+//     }
+//   }
 
-  @include breakpoint("<=narrower") {
-    width: 95% !important;
-  }
+//   @include breakpoint("<=narrower") {
+//     width: 95% !important;
+//   }
 
-  @include breakpoint("<=mobile") {
-    width: 90% !important;
-  }
+//   @include breakpoint("<=mobile") {
+//     width: 90% !important;
+//   }
 
-  @include breakpoint("<=mobilep") {
-    width: 100% !important;
-  }
-}
+//   @include breakpoint("<=mobilep") {
+//     width: 100% !important;
+//   }
+// }
 
-/* Row */
+// /* Row */
 
-.row {
-  @include html-grid((30px, 30px));
+// .row {
+//   @include html-grid((30px, 30px));
 
-  @include breakpoint("<=wide") {
-    @include html-grid((30px, 30px), "wide");
-  }
+//   @include breakpoint("<=wide") {
+//     @include html-grid((30px, 30px), "wide");
+//   }
 
-  @include breakpoint("<=normal") {
-    @include html-grid((30px, 30px), "normal");
-  }
+//   @include breakpoint("<=normal") {
+//     @include html-grid((30px, 30px), "normal");
+//   }
 
-  @include breakpoint("<=narrow") {
-    @include html-grid((30px, 30px), "narrow");
-  }
+//   @include breakpoint("<=narrow") {
+//     @include html-grid((30px, 30px), "narrow");
+//   }
 
-  @include breakpoint("<=narrower") {
-    @include html-grid((20px, 20px), "narrower");
-  }
+//   @include breakpoint("<=narrower") {
+//     @include html-grid((20px, 20px), "narrower");
+//   }
 
-  @include breakpoint("<=mobile") {
-    @include html-grid((20px, 230px), "mobile");
-  }
+//   @include breakpoint("<=mobile") {
+//     @include html-grid((20px, 230px), "mobile");
+//   }
 
-  @include breakpoint("<=mobilep") {
-    @include html-grid((20px, 20px), "mobilep");
-  }
-}
+//   @include breakpoint("<=mobilep") {
+//     @include html-grid((20px, 20px), "mobilep");
+//   }
+// }
 
 /* Section/Article */
 

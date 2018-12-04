@@ -22,6 +22,7 @@ class DashboardTable extends Component {
     const { id, name, make, model, year, color, status } = this.props;
     const vehicle_status = STATUSES[status];
     const vehicle_color = STATUSES_COLORS[status];
+
     return (
       <tr
         style={{ textAlign: "center" }}

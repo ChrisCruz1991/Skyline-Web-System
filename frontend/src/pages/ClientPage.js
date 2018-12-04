@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Table, Container, Row } from "reactstrap";
+import { Table, Container, Row, Col, Button } from "reactstrap";
+import { Link } from "react-router-dom";
 
 export default class ClientPage extends Component {
   state = {
@@ -22,6 +23,10 @@ export default class ClientPage extends Component {
     this.props.history.push(`/vehicle/${id}`);
   };
 
+  onClick = id => {
+    this.props.history.push(`/vehicle/new/${id}`);
+  };
+
   render() {
     const { client, isLoading } = this.state;
 
@@ -31,51 +36,64 @@ export default class ClientPage extends Component {
 
     const { vehicles } = client;
 
+    console.log(vehicles);
+
     /*
       Need fixing and styling, but
       receives information properly
     */
     return (
-      <div>
-        <h3 className="text-center mt-3">
-          {client.name} {client.lastName}
-        </h3>
-        <Container>
-          <Row>
-            <div className="col-md-6 pt-3">Informacion del vehiculo</div>
-            <div className="col-md-6 pt-3">
-              <h4 className="text-center pb-2">
-                Client have {client.vehicles.length} vehicles in total
-              </h4>
-              <Table>
-                <thead>
-                  <tr>
-                    <th>Make</th>
-                    <th>Model</th>
-                    <th>Year</th>
-                    <th>Color</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {vehicles.map(vehicle => {
-                    return (
-                      <tr
-                        key={vehicle.id}
-                        onClick={() => this.handleClick(vehicle.id)}
-                      >
-                        <td>{vehicle.Make}</td>
-                        <td>{vehicle.Model}</td>
-                        <td>{vehicle.Year}</td>
-                        <td>{vehicle.Color}</td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </Table>
-            </div>
-          </Row>
-        </Container>
-      </div>
+      <Container style={{ paddingTop: "20px" }}>
+        <Row>
+          <h3>
+            {client.name} {client.lastName}
+          </h3>
+        </Row>
+        <Row>
+          <Col>
+            <Table striped>
+              <thead>
+                <tr>
+                  <th>MAKE</th>
+                  <th>MODEL</th>
+                  <th>YEAR</th>
+                  <th>COLOR</th>
+                </tr>
+              </thead>
+              <tbody>
+                {vehicles.map(vehicle => {
+                  return (
+                    <tr
+                      key={vehicle.id}
+                      onClick={() => this.handleClick(vehicle.id)}
+                    >
+                      <td>{vehicle.Make}</td>
+                      <td>{vehicle.Model}</td>
+                      <td>{vehicle.Year}</td>
+                      <td style={{ textTransform: "capitalize" }}>
+                        {vehicle.Color}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </Table>
+            <Row>
+              <Col>
+                <Button
+                  onClick={() => this.onClick(vehicles[0].client_id)}
+                  color="info"
+                >
+                  Add New Vehicle
+                </Button>
+              </Col>
+              <Col>
+                <Button color="danger">Cancel</Button>
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }

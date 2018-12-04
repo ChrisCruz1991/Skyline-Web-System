@@ -26,10 +26,51 @@ router.get("/vehicle/dashboard/:id", (req, res) => {
 
 router.get("/vehicle/:id", (req, res) => {
   const id = req.params.id;
-  pool.query(`SELECT * FROM VEHICLE WHERE vehicle_id=${id}`, (err, result) => {
-    if (err) throw err;
-    return res.json(result);
-  });
+  pool.query(
+    `SELECT
+  vehicle_id,
+  make,
+  model,
+  year,
+  color,
+  status,
+  license_plate,
+  first_name,
+  last_name,
+  client_id
+  FROM VEHICLE
+  INNER JOIN CLIENT
+  ON VEHICLE.CLIENT_client_id = CLIENT.client_id
+  WHERE vehicle_id=${id}`,
+    (err, result) => {
+      if (err) {
+        return res.send({
+          success: false,
+          message: "ERROR! ",
+          err,
+          code: 500
+        });
+      } else {
+        return res.json({
+          success: true,
+          message: "Successful",
+          code: 200,
+          data: {
+            client_id: result[0].client_id,
+            client_name: result[0].first_name,
+            client_last_name: result[0].last_name,
+            make: result[0].make,
+            model: result[0].model,
+            color: result[0].color,
+            year: result[0].year,
+            status: result[0].status,
+            license_plate: result[0].license_plate,
+            vehicle_id: result[0].vehicle_id
+          }
+        });
+      }
+    }
+  );
 });
 
 /*
@@ -103,6 +144,34 @@ router.post("/vehicle/new", (req, res) => {
             message: "Vehicle succesfully added"
           });
         }
+      });
+    }
+  });
+});
+
+/*
+  POST request for new status of vehicle
+*/
+
+router.post("/vehicle/status", (req, res) => {
+  const { status, vehicle_id } = req.body;
+
+  const UDPATE_STATUS_QUERY =
+    "UPDATE VEHICLE SET status = ? WHERE vehicle_id = ?";
+
+  pool.query(UDPATE_STATUS_QUERY, [status, vehicle_id], (err, result) => {
+    if (err) {
+      return res.send({
+        success: false,
+        code: 500,
+        message: "ERROR: ",
+        err
+      });
+    } else {
+      return res.send({
+        success: true,
+        code: 200,
+        message: "Vehicle status successfully updated"
       });
     }
   });

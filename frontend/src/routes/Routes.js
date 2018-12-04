@@ -12,6 +12,7 @@ import EmployeePage from "../pages/EmployeePage";
 import Home from "../pages/Home";
 import EmployeesForm from "../pages/EmployeesForm";
 import Membership from "../pages/Membership";
+import NewVehiclePage from "../pages/NewVehiclePage";
 
 class Routes extends Component {
   render() {
@@ -21,9 +22,10 @@ class Routes extends Component {
           <Header />
           <div className="app">
             <Switch>
-              <Route exact path="/dashboard" component={Dashboard} />
+              <Route exact path="/vehicle" component={Dashboard} />
               <Route path="/signup" component={SignupPage} />
               <Route path="/login" component={LoginPage} />
+              <Route path="/vehicle/new/:id" component={NewVehiclePage} />
               <Route path="/vehicle/:id" component={VehiclePage} />
               <Route exact path="/clients" component={ClientsDashboard} />
               <Route path="/clients/new" component={Membership} />
