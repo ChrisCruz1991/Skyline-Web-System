@@ -53,8 +53,7 @@ export default class ClientsDashboard extends Component {
         </h2>
         <InputGroup
           className="inputGroup mx-auto"
-          style={{ borderRadius: "15px" }}
-        >
+          style={{ borderRadius: "15px" }}>
           <InputGroupAddon addonType="prepend">
             <InputGroupText>Search:</InputGroupText>
           </InputGroupAddon>

@@ -8,6 +8,7 @@ const vehicleRoute = require("./routes/vehicles");
 const employeeRoute = require("./routes/employees");
 const loginRoute = require("./routes/login");
 const signupRoute = require("./routes/signup");
+const services = require("./routes/services");
 
 const PORT = process.env.PORT || 8080;
 
@@ -46,6 +47,7 @@ app.use("/api", vehicleRoute);
 app.use("/api", employeeRoute);
 app.use("/api", loginRoute);
 app.use("/api", signupRoute);
+app.use("/api", services);
 
 // default route
 app.get("/", function(req, res) {

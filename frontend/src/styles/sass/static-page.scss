@@ -160,7 +160,6 @@ blockquote {
   padding: 1em 0 1em 2em;
 }
 
-
 section,
 article {
   &.special {
@@ -760,379 +759,317 @@ ul.actions {
     font-size: 1.25em;
   }
 
-  /* Section/Article */
+  /* Normal */
 
-  header {
-    &.major {
-      p {
-        font-size: 1.25em;
-      }
-    }
-  }
+  @include breakpoint("<=normal") {
+    /* Basic */
 
-  /* Header */
-
-  #header {
-    padding: 8em 0 16em 0;
-
-    h1 {
-      font-size: 2.25em;
+    body,
+    input,
+    select,
+    textarea {
+      font-size: 13pt;
     }
 
-    p {
-      font-size: 1.25em;
-      line-height: 1.65em;
-    }
-  }
-}
-
-/* Normal */
-
-@include breakpoint("<=normal") {
-  /* Basic */
-
-  body,
-  input,
-  select,
-  textarea {
-    font-size: 13pt;
-  }
-
-  h2 {
-    font-size: 1.35em;
-  }
-
-  h3 {
-    font-size: 1.15em;
-  }
-
-  /* Section/Article */
-
-  header {
-    &.major {
-      margin-bottom: 4em;
-      padding: 3em 0;
-
-      p {
-        font-size: 1.15em;
-      }
-    }
-  }
-
-  footer {
-    &.major {
-      margin-top: 4em;
-      padding: 3em 0;
-    }
-  }
-
-  /* Box */
-
-  .box {
-    padding: 2.5em;
-    margin-bottom: 4em;
-  }
-
-  /* Feature */
-
-  .feature {
-    height: 18em;
-
-    .content {
-      padding: 2.5em;
-    }
-  }
-
-  /* Header */
-
-  #header {
-    background-attachment: scroll, scroll, scroll;
-    background-image: url("/images/top-1600.svg"), url("/images/overlay.png"),
-      url("/images/header.jpg");
-    background-size: 1600px 230px, auto, cover;
-    padding: 6em 0 12em 0;
-
-    &:before {
-      height: calc(100% - 25px);
+    h2 {
+      font-size: 1.35em;
     }
 
-    &:after {
-      height: 25px;
-    }
-
-    h1 {
-      font-size: 2em;
-    }
-
-    p {
+    h3 {
       font-size: 1.15em;
     }
-  }
 
-  /* Footer */
+    /* Section/Article */
 
-  #footer {
-    background-image: url("/images/bottom-1600.svg");
-    background-size: 1600px 230px;
-    margin-top: -100px;
-    padding: calc(230px + 4em) 0 6em 0;
+    header {
+      &.major {
+        margin-bottom: 4em;
+        padding: 3em 0;
 
-    &:before {
-      height: calc(230px + 4em);
-    }
-  }
-
-  /* Main */
-
-  #main {
-    padding: 4em 0 3em 0;
-  }
-}
-
-/* Narrow */
-
-@include breakpoint("<=narrow") {
-  /* Basic */
-
-  body,
-  input,
-  select,
-  textarea {
-    font-size: 12pt;
-  }
-}
-
-/* Narrower */
-
-@include breakpoint("<=narrower") {
-  /* Section/Article */
-
-  header {
-    &.major {
-      padding-left: 2em;
-      padding-right: 2em;
-    }
-  }
-
-  footer {
-    &.major {
-      padding-left: 2em;
-      padding-right: 2em;
-    }
-  }
-}
-
-/* Mobile */
-
-@include breakpoint("<=mobile") {
-  /* Basic */
-
-  h2 {
-    font-size: 1em;
-  }
-
-  h3 {
-    font-size: 1em;
-  }
-
-  /* Section/Article */
-
-  header {
-    p {
-      font-size: 0.8em;
-    }
-
-    &.major {
-      margin-bottom: 2em;
-
-      br {
-        display: none;
+        p {
+          font-size: 1.15em;
+        }
       }
+    }
 
+    footer {
+      &.major {
+        margin-top: 4em;
+        padding: 3em 0;
+      }
+    }
+
+    /* Box */
+
+    .box {
+      padding: 2.5em;
+      margin-bottom: 4em;
+    }
+
+    /* Feature */
+
+    .feature {
+      height: 18em;
+
+      .content {
+        padding: 2.5em;
+      }
+    }
+
+    /* Footer */
+
+    #footer {
+      background-image: url("/images/bottom-1600.svg");
+      background-size: 1600px 230px;
+      margin-top: -100px;
+      padding: calc(230px + 4em) 0 6em 0;
+
+      &:before {
+        height: calc(230px + 4em);
+      }
+    }
+
+    /* Main */
+
+    #main {
+      padding: 4em 0 3em 0;
+    }
+  }
+
+  /* Narrow */
+
+  @include breakpoint("<=narrow") {
+    /* Basic */
+
+    body,
+    input,
+    select,
+    textarea {
+      font-size: 12pt;
+    }
+  }
+
+  /* Narrower */
+
+  @include breakpoint("<=narrower") {
+    /* Section/Article */
+
+    header {
+      &.major {
+        padding-left: 2em;
+        padding-right: 2em;
+      }
+    }
+
+    footer {
+      &.major {
+        padding-left: 2em;
+        padding-right: 2em;
+      }
+    }
+  }
+
+  /* Mobile */
+
+  @include breakpoint("<=mobile") {
+    /* Basic */
+
+    h2 {
+      font-size: 1em;
+    }
+
+    h3 {
+      font-size: 1em;
+    }
+
+    /* Section/Article */
+
+    header {
       p {
         font-size: 0.8em;
       }
+
+      &.major {
+        margin-bottom: 2em;
+
+        br {
+          display: none;
+        }
+
+        p {
+          font-size: 0.8em;
+        }
+      }
     }
-  }
 
-  footer {
-    &.major {
-      margin-top: 2em;
+    footer {
+      &.major {
+        margin-top: 2em;
 
-      br {
+        br {
+          display: none;
+        }
+      }
+    }
+
+    /* Box */
+
+    .box {
+      padding: 2em;
+      margin-bottom: 2em;
+    }
+
+    /* Feature */
+
+    .feature {
+      background: _palette(bg);
+      display: block;
+      height: auto;
+      margin-bottom: 2em;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      &:before,
+      &:after {
         display: none;
       }
-    }
-  }
 
-  /* Box */
+      .image {
+        float: none;
+        height: 15em;
+        width: 100%;
+      }
 
-  .box {
-    padding: 2em;
-    margin-bottom: 2em;
-  }
-
-  /* Feature */
-
-  .feature {
-    background: _palette(bg);
-    display: block;
-    height: auto;
-    margin-bottom: 2em;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-
-    &:before,
-    &:after {
-      display: none;
-    }
-
-    .image {
-      float: none;
-      height: 15em;
-      width: 100%;
-    }
-
-    .content {
-      border: solid 1px _palette(border);
-      padding: 2em !important;
-      text-align: center;
-      width: 100%;
-    }
-  }
-
-  /* Header */
-
-  #header {
-    background-image: url("/images/top-1280.svg"), url("/images/overlay.png"),
-      url("../../images/header.jpg");
-    background-size: 1280px 184px, auto, cover;
-    padding: 3em 0 7em 0;
-
-    &:before {
-      height: calc(100% - 20px);
-    }
-
-    &:after {
-      height: 20px;
-    }
-
-    .logo {
-      font-size: 1.5em;
-    }
-
-    h1 {
-      font-size: 1.25em;
-    }
-
-    p {
-      font-size: 1em;
-    }
-  }
-
-  /* Footer */
-
-  #footer {
-    background-image: url("/images/bottom-1280.svg");
-    background-size: 1280px 184px;
-    margin-top: -75px;
-    padding: calc(184px + 2em) 0 2em 0;
-
-    &:before {
-      height: calc(184px + 2em);
-    }
-
-    form {
-      padding-bottom: 0;
-    }
-  }
-
-  /* Main */
-
-  #main {
-    padding: 2em 0 2em 0;
-  }
-}
-
-/* Mobile (Portrait) */
-
-@include breakpoint("<=mobilep") {
-  /* Section/Article */
-
-  header {
-    &.major {
-      padding-left: 1em;
-      padding-right: 1em;
-    }
-  }
-
-  footer {
-    &.major {
-      padding-left: 1em;
-      padding-right: 1em;
-    }
-  }
-
-  /* Button */
-
-  input[type="submit"],
-  input[type="reset"],
-  input[type="button"],
-  .button {
-    display: block;
-    width: 100%;
-  }
-
-  /* Box */
-
-  .box {
-    padding: 2em 1em;
-  }
-
-  /* Feature */
-
-  .feature {
-    margin-bottom: 1em;
-
-    .content {
-      padding: 2em 1em !important;
-    }
-  }
-
-  /* Main */
-
-  #main {
-    padding-left: 1em;
-    padding-right: 1em;
-  }
-
-  /* Footer */
-
-  #footer {
-    margin-top: -100px;
-    padding-left: 1em;
-    padding-right: 1em;
-
-    .copyright {
-      li {
-        border: 0;
-        display: block;
-        margin: 0;
-        padding: 0.75em 0 0 0;
+      .content {
+        border: solid 1px _palette(border);
+        padding: 2em !important;
+        text-align: center;
+        width: 100%;
       }
     }
+
+    /* Header */
+
+    #header {
+      background-image: url("/images/top-1280.svg"), url("/images/overlay.png"),
+        url("../../images/header.jpg");
+      background-size: 1280px 184px, auto, cover;
+      padding: 3em 0 7em 0;
+
+      &:before {
+        height: calc(100% - 20px);
+      }
+
+      &:after {
+        height: 20px;
+      }
+
+      .logo {
+        font-size: 1.5em;
+      }
+
+      h1 {
+        font-size: 1.25em;
+      }
+
+      p {
+        font-size: 1em;
+      }
+    }
+
+    /* Footer */
+
+    #footer {
+      background-image: url("/images/bottom-1280.svg");
+      background-size: 1280px 184px;
+      margin-top: -75px;
+      padding: calc(184px + 2em) 0 2em 0;
+
+      &:before {
+        height: calc(184px + 2em);
+      }
+
+      form {
+        padding-bottom: 0;
+      }
+    }
+
+    /* Main */
+
+    #main {
+      padding: 2em 0 2em 0;
+    }
   }
 
-  /* Header */
+  /* Mobile (Portrait) */
 
-  #header {
-    padding-left: 2em;
-    padding-right: 2em;
+  @include breakpoint("<=mobilep") {
+    /* Section/Article */
 
-    br {
-      display: none;
+    header {
+      &.major {
+        padding-left: 1em;
+        padding-right: 1em;
+      }
+    }
+
+    footer {
+      &.major {
+        padding-left: 1em;
+        padding-right: 1em;
+      }
+    }
+
+    /* Button */
+
+    input[type="submit"],
+    input[type="reset"],
+    input[type="button"],
+    .button {
+      display: block;
+      width: 100%;
+    }
+
+    /* Box */
+
+    .box {
+      padding: 2em 1em;
+    }
+
+    /* Feature */
+
+    .feature {
+      margin-bottom: 1em;
+
+      .content {
+        padding: 2em 1em !important;
+      }
+    }
+
+    /* Main */
+
+    #main {
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+
+    /* Footer */
+
+    #footer {
+      margin-top: -100px;
+      padding-left: 1em;
+      padding-right: 1em;
+
+      .copyright {
+        li {
+          border: 0;
+          display: block;
+          margin: 0;
+          padding: 0.75em 0 0 0;
+        }
+      }
     }
   }
 }

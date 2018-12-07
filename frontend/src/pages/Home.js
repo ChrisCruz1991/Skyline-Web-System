@@ -33,13 +33,13 @@ class Home extends Component {
             <section className="feature left">
               <Link to="/" className="image icon fa-signal">
                 <img
-                  style={{ width: "500px" }}
-                  src="images/mechanicPhoto1.jpeg"
+                  style={{ width: "400px" }}
+                  src="images/garage.jpg"
                   alt=""
                 />
               </Link>
               <div className="content">
-                <h3>This Application is the best</h3>
+                <h3>The Best Application Out There</h3>
                 <p>
                   The only Application in the market to improve the workspace in
                   your workshop.

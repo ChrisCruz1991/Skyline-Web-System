@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Table, Container, Row, Col, Button } from "reactstrap";
-import { Link } from "react-router-dom";
 
 export default class ClientPage extends Component {
   state = {
@@ -65,8 +64,7 @@ export default class ClientPage extends Component {
                   return (
                     <tr
                       key={vehicle.id}
-                      onClick={() => this.handleClick(vehicle.id)}
-                    >
+                      onClick={() => this.handleClick(vehicle.id)}>
                       <td>{vehicle.Make}</td>
                       <td>{vehicle.Model}</td>
                       <td>{vehicle.Year}</td>
@@ -82,8 +80,7 @@ export default class ClientPage extends Component {
               <Col>
                 <Button
                   onClick={() => this.onClick(vehicles[0].client_id)}
-                  color="info"
-                >
+                  color="info">
                   Add New Vehicle
                 </Button>
               </Col>

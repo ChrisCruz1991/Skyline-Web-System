@@ -46,13 +46,19 @@ export default class LoginPage extends Component {
           className="d-flex justify-content-center align-items-center"
           style={{
             borderRadius: "10px",
-            height: "93vh"
-          }}
-        >
+            height: "100vh"
+          }}>
           <div className="d-block">
             <div className="d-flex justify-content-center align-items-center">
-              <div className="d-block" style={{ height: "500px" }}>
-                <h2 style={{ textAlign: "center", color: "white" }}>
+              <div
+                className="d-block"
+                style={{ height: "500px", marginTop: "80px" }}>
+                <h2
+                  style={{
+                    textAlign: "center",
+                    color: "white",
+                    marginBottom: "20px"
+                  }}>
                   Login Page
                 </h2>
                 <UserLoginForm
@@ -66,8 +72,7 @@ export default class LoginPage extends Component {
                   <Button
                     className="mx-5"
                     color="success"
-                    onClick={this.onLogInClick}
-                  >
+                    onClick={() => this.onLogInClick()}>
                     Log In
                   </Button>
                 </div>
