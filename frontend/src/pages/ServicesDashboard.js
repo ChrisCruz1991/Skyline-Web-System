@@ -10,16 +10,19 @@ class ServicesDashboard extends Component {
     isLoading: true
   };
   componentDidMount() {
-    const { garage_id } = getFromStorage("object");
-    axios
-      .get("http://localhost:8080/api/services/table/" + garage_id)
-      .then(res => {
-        this.setState({
-          services: res.data,
-          isLoading: false
-        });
-        console.log(res.data);
+    const storage = getFromStorage("object");
+    const headers = {
+      headers: {
+        authorization: `Bearer ${storage.token}`
+      }
+    };
+    axios.get("http://localhost:8080/api/services/table", headers).then(res => {
+      this.setState({
+        services: res.data,
+        isLoading: false
       });
+      console.log(res.data);
+    });
   }
 
   render() {

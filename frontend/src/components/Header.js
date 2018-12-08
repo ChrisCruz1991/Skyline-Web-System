@@ -26,19 +26,17 @@ export default class Header extends Component {
   };
 
   componentDidMount() {
-    const {
-      success,
-      employee_name,
-      employee_last_name,
-      garage_name,
-      garage_id
-    } = getFromStorage("object");
-    console.log(employee_name);
-    this.setState({
-      garageName: garage_name,
-      name: employee_name,
-      lastName: employee_last_name
-    });
+    console.log("Getting from storage", getFromStorage("object"));
+    const token = getFromStorage("object");
+    console.log(token.results);
+    if (token.results) {
+      this.setState({
+        garageName: token.results.garage_name,
+        name: token.results.employee_name,
+        lastName: token.results.employee_last_name
+      });
+    }
+
     // if (success) {
     //   const {
     //     employee_name = null,

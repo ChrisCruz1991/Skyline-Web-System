@@ -1,27 +1,37 @@
 const pool = require("../model/connection");
 const express = require("express");
 const router = express.Router();
+const verifyToken = require("./token");
+const jwt = require("jsonwebtoken");
 
-router.get("/vehicle/dashboard/:id", (req, res) => {
-  const id = req.params.id;
-  pool.query(
-    `SELECT
-    vehicle_id AS id,
-    make AS Make,
-    model AS Model,
-    color AS Color,
-    year AS Year,
-    status AS Status,
-    first_name AS Name
-    FROM VEHICLE
-    INNER JOIN CLIENT ON CLIENT.client_id=VEHICLE.CLIENT_client_id
-    WHERE VEHICLE.GARAGE_garage_id = ?`,
-    id,
-    (err, result) => {
-      if (err) throw err;
-      return res.json(result);
+router.get("/vehicle/dashboard", verifyToken.verifyToken, (req, res) => {
+  console.log("entrando a dashboard");
+  jwt.verify(req.token, "secretkey", (err, authData) => {
+    if (err) {
+      res.sendStatus(403);
+    } else {
+      console.log("entrando al query");
+      console.log(authData.garage_id);
+      pool.query(
+        `SELECT
+        vehicle_id AS id,
+        make AS Make,
+        model AS Model,
+        color AS Color,
+        year AS Year,
+        status AS Status,
+        first_name AS Name
+        FROM VEHICLE
+        INNER JOIN CLIENT ON CLIENT.client_id=VEHICLE.CLIENT_client_id
+        WHERE VEHICLE.GARAGE_garage_id = ?`,
+        authData.garage_id,
+        (err, result) => {
+          if (err) throw err;
+          return res.json(result);
+        }
+      );
     }
-  );
+  });
 });
 
 router.get("/vehicle/:id", (req, res) => {

@@ -31,7 +31,7 @@ export default class LoginPage extends Component {
         console.log(res);
         if (res.data.success) {
           console.log("Im in");
-          const obj = res.data.results;
+          const obj = { token: res.data.token, results: res.data.results };
           setInStorage("object", obj);
           this.props.history.push("/dashboard");
         }

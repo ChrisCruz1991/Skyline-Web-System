@@ -3,7 +3,7 @@ import { Table, Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import EmployeesTable from "../components/EmployeesTable";
-import '../styles/sass/pages/EmployeeDashboard.scss';
+import "../styles/sass/pages/EmployeeDashboard.scss";
 import { getFromStorage } from "../utils/storage";
 
 export default class EmployeesDashboard extends Component {
@@ -13,9 +13,14 @@ export default class EmployeesDashboard extends Component {
   };
 
   componentDidMount() {
-    const { garage_id } = getFromStorage("object");
+    const token = getFromStorage("object");
+    console.log("MAYBE TOKEN", token);
     axios
-      .get("http://localhost:8080/api/employee/table/" + garage_id)
+      .get("http://localhost:8080/api/employee/table", {
+        headers: {
+          authorization: `Bearer ${token.token}`
+        }
+      })
       .then(res =>
         this.setState({
           employees: res.data,

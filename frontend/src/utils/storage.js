@@ -26,7 +26,7 @@ export function setInStorage(key, obj) {
   if (!key) {
     console.log("Error: Key is missing");
   }
-
+  console.log("setting local storage token", obj);
   try {
     localStorage.setItem(key, JSON.stringify(obj));
   } catch (err) {

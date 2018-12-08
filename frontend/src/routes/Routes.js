@@ -25,14 +25,9 @@ import ServicesDashboard from "../pages/ServicesDashboard";
 
 const checkAuth = () => {
   console.log(getFromStorage("object"));
-  const {
-    success,
-    employee_name,
-    employee_last_name,
-    garage_name
-  } = getFromStorage("object");
-  if (!garage_name) return false;
-  console.log("Este es el garage", garage_name);
+  const token = getFromStorage("object");
+  if (!token.results.garage_name) return false;
+  console.log("Este es el garage", token.results.garage_name);
   return true;
   // try {
   //   console.log("por aqui", decode(garage_name));

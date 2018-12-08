@@ -1,26 +1,33 @@
 const pool = require("../model/connection");
 const express = require("express");
 const router = express.Router();
+const verifyToken = require("./token");
+const jwt = require("jsonwebtoken");
 
-router.get("/clients/:id", (req, res) => {
-  const id = req.params.id;
-  pool.query(
-    `SELECT
-    client_id AS id,
-    first_name AS Name,
-    last_name AS Last_Name,
-    email AS Email,
-    phone AS Phone
-    FROM VEHICLE
-    INNER JOIN CLIENT
-    ON CLIENT.client_id = VEHICLE.CLIENT_client_id
-    WHERE VEHICLE.GARAGE_garage_id = ?`,
-    id,
-    (err, result) => {
-      if (err) throw err;
-      return res.json(result);
+router.get("/clients", verifyToken.verifyToken, (req, res) => {
+  jwt.verify(req.token, "secretkey", (err, authData) => {
+    if (err) {
+      res.sendStatus(403);
+    } else {
+      pool.query(
+        `SELECT
+        client_id AS id,
+        first_name AS Name,
+        last_name AS Last_Name,
+        email AS Email,
+        phone AS Phone
+        FROM VEHICLE
+        INNER JOIN CLIENT
+        ON CLIENT.client_id = VEHICLE.CLIENT_client_id
+        WHERE VEHICLE.GARAGE_garage_id = ?`,
+        authData.garage_id,
+        (err, result) => {
+          if (err) throw err;
+          return res.json(result);
+        }
+      );
     }
-  );
+  });
 });
 
 router.get("/client/:id", (req, res) => {
@@ -71,6 +78,7 @@ router.get("/client/:id", (req, res) => {
   POST data for new client
 */
 
+// Falta Añadirle la verificacion de token.
 router.post("/client/new", (req, res) => {
   const { first_name, last_name, email, phone, address } = req.body;
 
