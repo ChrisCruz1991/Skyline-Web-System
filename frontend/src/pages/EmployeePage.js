@@ -13,11 +13,16 @@ export default class EmployeePage extends Component {
 
   componentDidMount() {
     const id = this.props.match.params.id;
-    const { garage_id } = getFromStorage("object");
+    const storage = getFromStorage("object");
+    const headers = {
+      headers: {
+        authorization: `header ${storage.token}`
+      }
+    };
     axios
       .all([
-        axios.get(`http://localhost:8080/api/employee/${id}`),
-        axios.get(`http://localhost:8080/api/vehicle/dashboard/${garage_id}`)
+        axios.get(`http://localhost:8080/api/employee/${id}`, headers),
+        axios.get(`http://localhost:8080/api/vehicle/dashboard`, headers)
       ])
       .then(
         axios.spread((employee, vehicles) => {

@@ -37,7 +37,7 @@ export default class Dashboard extends Component {
     }
 
     return (
-      <div className="App mt-5">
+      <div className="App">
         <h2 className="text-center pt-3">{garageName} | WORKSHOP</h2>
         <p className="text-center">
           Theres {vehicles.length} vehicles in the workshop.

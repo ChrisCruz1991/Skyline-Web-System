@@ -35,39 +35,45 @@ router.get("/employee/table", verifyToken.verifyToken, (req, res) => {
 });
 
 // Arreglar los codigos de token
-router.get("/employee/:id", (req, res) => {
-  const id = req.params.id;
-  pool.query(
-    `SELECT employee_id, vehicle_id, first_name, last_name, address, phone, role, make, model, color, year
+router.get("/employee/:id", verifyToken.verifyToken, (req, res) => {
+  jwt.verify(req.token, "secretkey", (err, authData) => {
+    if (err) {
+      res.sendStatus(403);
+    } else {
+      const id = req.params.id;
+      pool.query(
+        `SELECT employee_id, vehicle_id, first_name, last_name, address, phone, role, make, model, color, year
       FROM VEHICLE
       INNER JOIN EMPLOYEE ON EMPLOYEE.employee_id=VEHICLE.EMPLOYEE_employee_id
       WHERE employee_id=${id};`,
-    (err, result) => {
-      if (err) {
-        return res.send({
-          success: false,
-          message: "Dervin fucked up: " + err
-        });
-      }
-      const list_vehicles = result.map(item => {
-        return {
-          id: item.vehicle_id,
-          Make: item.make,
-          Model: item.model,
-          Color: item.color,
-          Year: item.year
-        };
-      });
-      res.json({
-        id: result[0].employee_id,
-        name: `${result[0].first_name} ${result[0].last_name}`,
-        phone: result[0].phone,
-        address: result[0].address,
-        role: result[0].role,
-        vehicle_list: list_vehicles
-      });
+        (err, result) => {
+          if (err) {
+            return res.send({
+              success: false,
+              message: "Dervin fucked up: " + err
+            });
+          }
+          const list_vehicles = result.map(item => {
+            return {
+              id: item.vehicle_id,
+              Make: item.make,
+              Model: item.model,
+              Color: item.color,
+              Year: item.year
+            };
+          });
+          res.json({
+            id: result[0].employee_id,
+            name: `${result[0].first_name} ${result[0].last_name}`,
+            phone: result[0].phone,
+            address: result[0].address,
+            role: result[0].role,
+            vehicle_list: list_vehicles
+          });
+        }
+      );
     }
-  );
+  });
 });
 
 /*

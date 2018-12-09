@@ -35,20 +35,34 @@ export default class ClientPage extends Component {
 
     const { vehicles } = client;
 
-    console.log(vehicles);
+    console.log(client);
 
     /*
   Need fixing and styling, but
   receives information properly
     */
     return (
-      <Container style={{ paddingTop: "20px" }}>
-        <Row>
-          <h3>
-            {client.name} {client.lastName}
-          </h3>
-        </Row>
-        <Row>
+      <Container
+        style={{
+          boxShadow:
+            "0 9px 0px 0px white, 0 -9px 0px 0px white, 12px 0 15px -4px rgba(31, 73, 125, 0.8), -12px 0 15px -4px rgba(31, 73, 125, 0.8);"
+        }}>
+        <h3>
+          Client: {client.name} {client.lastName}
+        </h3>
+        <h5>Email:</h5>
+        <h5>Phone:</h5>
+        <h5>Address:</h5>
+        <p />
+        <div className="d-flex flex-row-reverse">
+          <Button
+            className="mx-2"
+            onClick={() => this.onClick(vehicles[0].client_id)}
+            color="info">
+            Add New Vehicle
+          </Button>
+        </div>
+        <Row className="mt-2">
           <Col>
             <Table striped>
               <thead>
@@ -76,18 +90,6 @@ export default class ClientPage extends Component {
                 })}
               </tbody>
             </Table>
-            <Row>
-              <Col>
-                <Button
-                  onClick={() => this.onClick(vehicles[0].client_id)}
-                  color="info">
-                  Add New Vehicle
-                </Button>
-              </Col>
-              <Col>
-                <Button color="danger">Cancel</Button>
-              </Col>
-            </Row>
           </Col>
         </Row>
       </Container>

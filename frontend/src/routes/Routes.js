@@ -80,29 +80,28 @@ class Routes extends Component {
   render() {
     return (
       <Router>
-        <div style={{ height: "100vh" }}>
+        <div
+          style={{
+            height: "100vh",
+            backgroundColor: "#f4f7f8",
+            paddingTop: "4.5rem"
+          }}>
           <Header />
-          <div className="app" style={{ backgroundColor: "#f4f7f8" }}>
-            <Switch>
-              <Route path="/signup" component={SignupPage} />
-              <Route path="/login" component={LoginPage} />
-              <Route exact path="/" component={Home} />
-              <AuthRoute exact path="/vehicle" component={Dashboard} />
-              <AuthRoute path="/vehicle/new/:id" component={NewVehiclePage} />
-              <AuthRoute path="/vehicle/:id" component={VehiclePage} />
-              <AuthRoute exact path="/clients" component={ClientsDashboard} />
-              <AuthRoute path="/clients/new" component={Membership} />
-              <AuthRoute path="/client/:id" component={ClientPage} />
-              <AuthRoute
-                exact
-                path="/employees"
-                component={EmployeesDashboard}
-              />
-              <AuthRoute path="/employees/new" component={EmployeesForm} />
-              <AuthRoute path="/employee/:id" component={EmployeePage} />
-              <AuthRoute path="/services" component={ServicesDashboard} />
-            </Switch>
-          </div>
+          <Switch>
+            <Route path="/signup" component={SignupPage} />
+            <Route path="/login" component={LoginPage} />
+            <Route exact path="/" component={Home} />
+            <AuthRoute exact path="/vehicle" component={Dashboard} />
+            <AuthRoute path="/vehicle/new/:id" component={NewVehiclePage} />
+            <AuthRoute path="/vehicle/:id" component={VehiclePage} />
+            <AuthRoute exact path="/clients" component={ClientsDashboard} />
+            <AuthRoute path="/clients/new" component={Membership} />
+            <AuthRoute path="/client/:id" component={ClientPage} />
+            <AuthRoute exact path="/employees" component={EmployeesDashboard} />
+            <AuthRoute path="/employees/new" component={EmployeesForm} />
+            <AuthRoute path="/employee/:id" component={EmployeePage} />
+            <AuthRoute path="/services" component={ServicesDashboard} />
+          </Switch>
         </div>
       </Router>
     );
