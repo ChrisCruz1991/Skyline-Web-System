@@ -37,6 +37,9 @@ router.get("/client/:id", (req, res) => {
     client_id,
     first_name AS Name,
     last_name AS Last_Name,
+    CLIENT.email AS email,
+    CLIENT.phone as phone,
+    CLIENT.address AS address,
     make AS Make,
     model AS Model,
     color AS Color,
@@ -54,12 +57,19 @@ router.get("/client/:id", (req, res) => {
           message: "Error in client with id: " + err
         });
       }
+
       // Returns the list of vehicles of that
       // specific client by id
+
+      // si alguien mira esto porfavor es solo para salir de la clase
+      // se que no hace sentido y esta super mal lo reconozco.
       const list_vehicles = result.map(result => {
         return {
           id: result.id,
           Make: result.Make,
+          Email: result.email,
+          Phone: result.phone,
+          address: result.address,
           Model: result.Model,
           Color: result.Color,
           Year: result.Year,
@@ -129,8 +139,8 @@ router.post("/client/new", (req, res) => {
   POST REQUEST for adding new vehicle
   to a specific client
 */
-
 router.post("/client/new_vehicle", (req, res) => {
+  console.log("adding new vehicle");
   const {
     make,
     model,
@@ -140,10 +150,9 @@ router.post("/client/new_vehicle", (req, res) => {
     garage_id,
     client_id
   } = req.body;
-
   const INSERT_VEHICLE_QUERY = `INSERT INTO VEHICLE
-  (make, model, year, color, vehicle_in_garage, status, license_plate, CLIENT_client_id, GARAGE_garage_id)
-  VALUES ?`;
+      (make, model, year, color, vehicle_in_garage, status, license_plate, CLIENT_client_id, GARAGE_garage_id)
+      VALUES ?`;
 
   const INSERT_VEHICLE_VALUES = [
     [make, model, year, color, 1, 0, license_plate, client_id, garage_id]
@@ -151,12 +160,15 @@ router.post("/client/new_vehicle", (req, res) => {
 
   pool.query(INSERT_VEHICLE_QUERY, [INSERT_VEHICLE_VALUES], (err, result) => {
     if (err) {
-      return res.send({
+      console.log("error");
+      res.send({
         code: 500,
         success: false,
         message: "ERROR: ",
-        err
+        err,
+        error: "error"
       });
+      console.log("error");
     } else {
       return res.send({
         code: 500,

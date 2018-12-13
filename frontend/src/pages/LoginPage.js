@@ -50,9 +50,7 @@ export default class LoginPage extends Component {
           }}>
           <div className="d-block">
             <div className="d-flex justify-content-center align-items-center">
-              <div
-                className="d-block"
-                style={{ height: "500px", marginTop: "80px" }}>
+              <div className="d-block">
                 <h2
                   style={{
                     textAlign: "center",

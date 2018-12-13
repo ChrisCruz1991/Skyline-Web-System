@@ -10,6 +10,7 @@ import {
   Input,
   Label
 } from "reactstrap";
+import { Redirect } from "react-router-dom";
 import { getFromStorage } from "../utils/storage";
 
 export default class EmployeesForm extends Component {
@@ -17,19 +18,46 @@ export default class EmployeesForm extends Component {
     first_name: "",
     last_name: "",
     phone: "",
-    address: ""
+    address: "",
+    valid: true,
+    addedd: false
   };
 
   onChange = e => {
     this.setState({ [e.target.name]: [e.target.value] });
   };
 
-  formSubmit = e => {
-    e.preventDefault();
-    const { garage_id } = getFromStorage("object");
-    const { first_name, last_name, phone, address } = this.state;
-    this.setState({ isLoading: true });
+  validFormatError = _ => {
+    this.setState({
+      valid: false
+    });
+  };
 
+  formSubmit = e => {
+    if (this.state.first_name.length < 5) {
+      this.validFormatError();
+      return null;
+    }
+
+    if (this.state.last_name.length < 5) {
+      this.validFormatError();
+      return null;
+    }
+
+    if (this.state.address.length < 5) {
+      this.validFormatError();
+      return;
+    }
+
+    if (this.state.phone.length < 5) {
+      this.validFormatError();
+      return;
+    }
+    e.preventDefault();
+    const storage = getFromStorage("object");
+    const { first_name, last_name, phone, address } = this.state;
+    console.log(storage.results.garage_id);
+    this.setState({ isLoading: true });
     // post request to create new employee
     axios
       .post("http://localhost:8080/api/employee/new", {
@@ -37,10 +65,12 @@ export default class EmployeesForm extends Component {
         last_name,
         phone,
         address,
-        garage_id
+        garage_id: storage.results.garage_id,
+        addedd: true
       })
       .then(res => {
         console.log(res);
+        // this.props.history.push("/employees");
       });
   };
 
@@ -100,8 +130,7 @@ export default class EmployeesForm extends Component {
             display: "flex",
             justifyContent: "space-around",
             alignItems: "center"
-          }}
-        >
+          }}>
           <Button color="info" onClick={this.formSubmit}>
             Submit
           </Button>
@@ -109,6 +138,14 @@ export default class EmployeesForm extends Component {
             Cancel
           </Button>
         </Row>
+        <center>
+          {this.state.valid === false ? (
+            <p className="text-danger">Error on input</p>
+          ) : null}
+          {this.state.addedd === true ? (
+            <p className="text-primary">Added Employee</p>
+          ) : null}
+        </center>
       </Container>
     );
   }

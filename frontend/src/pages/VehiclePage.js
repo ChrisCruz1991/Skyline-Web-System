@@ -160,9 +160,6 @@ export default class VehiclePage extends Component {
                       Unattended
                     </DropdownItem>
                     <DropdownItem onClick={this.onItemSelect}>
-                      Attending
-                    </DropdownItem>
-                    <DropdownItem onClick={this.onItemSelect}>
                       Ready
                     </DropdownItem>
                   </DropdownMenu>

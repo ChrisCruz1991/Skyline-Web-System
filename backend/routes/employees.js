@@ -41,11 +41,13 @@ router.get("/employee/:id", verifyToken.verifyToken, (req, res) => {
       res.sendStatus(403);
     } else {
       const id = req.params.id;
+      console.log("id from employee: ", id);
       pool.query(
         `SELECT employee_id, vehicle_id, first_name, last_name, address, phone, role, make, model, color, year
       FROM VEHICLE
       INNER JOIN EMPLOYEE ON EMPLOYEE.employee_id=VEHICLE.EMPLOYEE_employee_id
-      WHERE employee_id=${id};`,
+      WHERE employee_id=?`,
+        id,
         (err, result) => {
           if (err) {
             return res.send({
@@ -80,7 +82,6 @@ router.get("/employee/:id", verifyToken.verifyToken, (req, res) => {
     router post to insert new employee
     for your specific garage
   */
-
 router.post("/employee/new", (req, res) => {
   const { first_name, last_name, phone, address, garage_id } = req.body;
 
@@ -103,8 +104,8 @@ router.post("/employee/new", (req, res) => {
           });
         } else {
           const INSERT_QUERY = `INSERT INTO EMPLOYEE
-            (first_name, last_name, phone, address, role, GARAGE_garage_id)
-            VALUES ?`;
+                (first_name, last_name, phone, address, role, GARAGE_garage_id)
+                VALUES ?`;
           const VALUES = [
             [first_name, last_name, phone, address, "mechanic", garage_id]
           ];

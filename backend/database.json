@@ -1,0 +1,17 @@
+{
+  "garage": "Plavica",
+  "employee": "Jose Cabron",
+  "client": "Christopher future windows",
+  "vehicle": "Toyota Yaris 2006",
+  "services": [
+    {
+      "service": "Gomas",
+      "cost": "500"
+    },
+    {
+      "service": "Aceite y filtro",
+      "cost": "40"
+    }
+  ],
+  "total": "540"
+}

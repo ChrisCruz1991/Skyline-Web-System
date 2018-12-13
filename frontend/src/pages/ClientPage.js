@@ -33,6 +33,8 @@ export default class ClientPage extends Component {
       return <p>Loading...</p>;
     }
 
+    console.log("this is the client", client);
+
     const { vehicles } = client;
 
     console.log(client);
@@ -42,17 +44,13 @@ export default class ClientPage extends Component {
   receives information properly
     */
     return (
-      <Container
-        style={{
-          boxShadow:
-            "0 9px 0px 0px white, 0 -9px 0px 0px white, 12px 0 15px -4px rgba(31, 73, 125, 0.8), -12px 0 15px -4px rgba(31, 73, 125, 0.8);"
-        }}>
+      <Container className="mt-2">
         <h3>
           Client: {client.name} {client.lastName}
         </h3>
-        <h5>Email:</h5>
-        <h5>Phone:</h5>
-        <h5>Address:</h5>
+        <h5>Email: {vehicles[0].Email}</h5>
+        <h5>Phone: {vehicles[0].Phone}</h5>
+        <h5>Address: {vehicles[0].address}</h5>
         <p />
         <div className="d-flex flex-row-reverse">
           <Button

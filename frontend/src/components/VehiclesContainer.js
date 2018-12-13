@@ -18,13 +18,13 @@ export default class VehiclesContainer extends Component {
 
     return (
       <Col
-        className="col-md-6 mt-3"
-        style={{ background: "lightgrey", borderRadius: "10px" }}
-      >
+        className="mt-3"
+        md={6}
+        style={{ background: "lightgrey", borderRadius: "10px" }}>
         <h3 style={{ paddingTop: "15px", textAlign: "center" }}>
-          List Of Vehicles Handled By {name}
+          List Of Vehicles Handled By: <br /> {name}
         </h3>
-        <Row className="pt-3">
+        <div className="pt-3">
           <Table>
             <thead>
               <tr>
@@ -49,8 +49,6 @@ export default class VehiclesContainer extends Component {
               })}
             </tbody>
           </Table>
-        </Row>
-        <Row>
           <Button onClick={this.clickButton} color="info" size="lg" block>
             Add Vehicle
           </Button>
@@ -60,7 +58,7 @@ export default class VehiclesContainer extends Component {
               vehicles={vehiclesFromGarage}
             />
           )}
-        </Row>
+        </div>
       </Col>
     );
   }

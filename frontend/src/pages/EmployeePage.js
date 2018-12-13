@@ -74,10 +74,11 @@ export default class EmployeePage extends Component {
       receives information properly
     */
 
+    console.log(vehicles);
     return (
       <Container>
         <Row>
-          <Col className="col-md-6 mt-3">
+          <Col className="mt-3" md={6}>
             <h3 className="">{name}</h3>
             <p>Role: {role}</p>
             <p>Phone Number: {phone}</p>

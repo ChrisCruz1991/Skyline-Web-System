@@ -6,6 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
@@ -13,9 +14,13 @@
     "ejs": "^2.6.1",
     "express": "~4.16.0",
     "express-session": "^1.15.6",
+    "fs-extra": "^7.0.1",
+    "handlebars": "^4.0.12",
     "http-errors": "~1.6.2",
     "jsonwebtoken": "^8.4.0",
+    "moment": "^2.22.2",
     "morgan": "~1.9.0",
-    "mysql": "^2.16.0"
+    "mysql": "^2.16.0",
+    "puppeteer": "^1.11.0"
   }
 }

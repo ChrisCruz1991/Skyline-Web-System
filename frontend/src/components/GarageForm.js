@@ -2,11 +2,12 @@ import React from "react";
 import { Form, FormGroup, Label, Input } from "reactstrap";
 
 const GarageForm = props => (
-  <Form className="text-white">
+  <Form className="text-white" style={{}}>
     <h2 className="text-white">Garage</h2>
     <FormGroup>
       <Label htmlFor="garage_name">Garage Name:</Label>
       <Input
+        className="text-white"
         onChange={props.onChange}
         type="text"
         name="garage_name"
@@ -16,6 +17,7 @@ const GarageForm = props => (
     <FormGroup>
       <Label htmlFor="garage_address">Address</Label>
       <Input
+        className="text-white"
         onChange={props.onChange}
         type="text"
         name="garage_address"
@@ -25,6 +27,7 @@ const GarageForm = props => (
     <FormGroup>
       <Label htmlFor="garage_phone">Phone #</Label>
       <Input
+        className="text-white"
         onChange={props.onChange}
         type="text"
         name="garage_phone"

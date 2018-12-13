@@ -126,7 +126,7 @@ export default class Header extends Component {
 
     const dashboard = garageName ? (
       <NavItem>
-        <Link to="/git" className="text-white my-3">
+        <Link to="/vehicle" className="text-white my-3">
           Dashboard
         </Link>
       </NavItem>

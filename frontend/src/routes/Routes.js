@@ -22,6 +22,7 @@ import { decode } from "jwt-decode";
 import { getFromStorage, setInStorage } from "../utils/storage";
 import axios from "axios";
 import ServicesDashboard from "../pages/ServicesDashboard";
+import SpecificService from "../pages/SpecificService";
 
 const checkAuth = () => {
   console.log(getFromStorage("object"));
@@ -84,7 +85,7 @@ class Routes extends Component {
           style={{
             height: "100vh",
             backgroundColor: "#f4f7f8",
-            paddingTop: "4.5rem"
+            paddingTop: "3rem"
           }}>
           <Header />
           <Switch>
@@ -101,6 +102,7 @@ class Routes extends Component {
             <AuthRoute path="/employees/new" component={EmployeesForm} />
             <AuthRoute path="/employee/:id" component={EmployeePage} />
             <AuthRoute path="/services" component={ServicesDashboard} />
+            <AuthRoute path="/service/:id" component={SpecificService} />
           </Switch>
         </div>
       </Router>

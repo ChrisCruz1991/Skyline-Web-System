@@ -23,12 +23,16 @@ class DashboardTable extends Component {
     const vehicle_status = STATUSES[status];
     const vehicle_color = STATUSES_COLORS[status];
 
+    // Added request by Christopher
+    if (status === 1) {
+      return null;
+    }
+
     return (
       <tr
         style={{ textAlign: "center" }}
         id={id}
-        onClick={() => this.handleClick(id)}
-      >
+        onClick={() => this.handleClick(id)}>
         <td>{name}</td>
         <td>{make}</td>
         <td>{model}</td>
@@ -41,8 +45,7 @@ class DashboardTable extends Component {
               borderRadius: "25px",
               padding: "10px 20px",
               color: "white"
-            }}
-          >
+            }}>
             {vehicle_status}
           </span>
         </td>

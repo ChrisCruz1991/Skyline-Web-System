@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import GarageForm from "../components/GarageForm";
 import UserForm from "../components/UserForm";
-import { Button } from "reactstrap";
+import { Button, Container, Row, Col } from "reactstrap";
 import axios from "axios";
 
 export default class SignupPage extends Component {
@@ -73,46 +73,27 @@ export default class SignupPage extends Component {
 
     return (
       <div className="signUp_background">
-        <h2 className="text-white" style={{ textAlign: "center" }}>
-          Register Form
-        </h2>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center"
-          }}
-        >
-          <div
-            className="mr-5 p-3"
-            style={{
-              backgroundColor: "rgba(128, 128, 128, .9)",
-              width: "500px",
-              borderRadius: "13px"
-            }}
-          >
-            <GarageForm onChange={this.onChange} />
-          </div>
-          <div
-            className="ml-5 p-3"
-            style={{
-              backgroundColor: "rgba(128, 128, 128, .9)",
-              width: "500px",
-              borderRadius: "13px"
-            }}
-          >
-            <UserForm onChange={this.onChange} />
-          </div>
-        </div>
-        <div
-          className="my-3 pb-3"
-          style={{
-            display: "flex",
-            justifyContent: "space-around"
-          }}
-        >
-          <Button onClick={this.onCancelClick}>Cancel</Button>
-          <Button onClick={this.onRegisterClick}>Register</Button>
-        </div>
+        <Container className="mt-2">
+          <h2 className="text-white" style={{ textAlign: "center" }}>
+            Register Form
+          </h2>
+          <Row>
+            <Col md={6} sm={12}>
+              <GarageForm onChange={this.onChange} />
+              <div className="my-3 pb-3">
+                <Button className="mr-4 px-5" onClick={this.onCancelClick}>
+                  Cancel
+                </Button>
+                <Button className="mx-4 px-5" onClick={this.onRegisterClick}>
+                  Register
+                </Button>
+              </div>
+            </Col>
+            <Col md={6} sm={12}>
+              <UserForm onChange={this.onChange} />
+            </Col>
+          </Row>
+        </Container>
       </div>
     );
   }

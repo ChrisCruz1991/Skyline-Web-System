@@ -4,9 +4,10 @@ const jwt = require("jsonwebtoken");
 // Authorization: Bearer <access_token>
 module.exports = {
   verifyToken: function verifyToken(req, res, next) {
-    console.log(req);
+    // console.log(req);
     // Get auth header value
     const bearerHeader = req.headers["authorization"];
+    console.log("token", req.headers["authorization"]);
 
     // check if bearer id undefined
     if (typeof bearerHeader !== "undefined") {
@@ -23,7 +24,7 @@ module.exports = {
       next();
     } else {
       // Forbidden
-      res.sendStatus(403);
+      res.sendStatus(405);
     }
   }
 };

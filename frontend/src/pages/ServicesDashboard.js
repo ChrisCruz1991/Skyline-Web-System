@@ -28,13 +28,15 @@ class ServicesDashboard extends Component {
   render() {
     const { services } = this.state;
     return (
-      <div>
+      <div className="text-center mt-4">
         <h3>All Service Ticket is your Garage</h3>
         <Table>
           <thead>
-            <th>Service Ticket ID</th>
+            <th>Vehicle</th>
+            <th>Owner</th>
             <th>Services</th>
             <th>Total</th>
+            <th>Status</th>
           </thead>
           <tbody>
             {services.map(service => (
