@@ -7,7 +7,8 @@ class ServicesCreate extends Component {
     rows: [1],
     service: [],
     cost: [],
-    vehicle: {}
+    vehicle: {},
+    success: false
   };
 
   addService = _ => {
@@ -55,7 +56,13 @@ class ServicesCreate extends Component {
         VEHICLE_vehicle_id: this.state.vehicle.vehicle_id,
         EMPLOYEE_employee_id: this.state.vehicle.EMPLOYEE_employee_id
       })
-      .then(res => console.log(res));
+      .then(res => {
+        if (res.data.success) {
+          this.setState({
+            success: true
+          });
+        }
+      });
   };
 
   render() {
@@ -92,6 +99,11 @@ class ServicesCreate extends Component {
           <Button className="mx-2" color="info" onClick={this.AddScript}>
             Done
           </Button>
+        </div>
+        <div>
+          {this.state.success && (
+            <p className="text-success">Added new services</p>
+          )}
         </div>
       </Container>
     );
