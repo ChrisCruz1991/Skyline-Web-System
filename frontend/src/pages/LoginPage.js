@@ -33,7 +33,8 @@ export default class LoginPage extends Component {
           console.log("Im in");
           const obj = { token: res.data.token, results: res.data.results };
           setInStorage("object", obj);
-          this.props.history.push("/dashboard");
+          // this.props.history.push("/dashboard");
+          this.props.history.push("/vehicle");
         }
       })
       .catch(error => console.log(error));

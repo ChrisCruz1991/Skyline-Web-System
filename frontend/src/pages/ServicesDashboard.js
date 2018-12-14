@@ -27,23 +27,32 @@ class ServicesDashboard extends Component {
 
   render() {
     const { services } = this.state;
+    console.log("services", services);
+
+    let newServices = services.includes(service => service.status === 2);
+
+    console.log(newServices);
+
     return (
       <div className="text-center mt-4">
         <h3>All Service Ticket is your Garage</h3>
-        <Table>
-          <thead>
-            <th>Vehicle</th>
-            <th>Owner</th>
-            <th>Services</th>
-            <th>Total</th>
-            <th>Status</th>
-          </thead>
-          <tbody>
-            {services.map(service => (
-              <ServicesTable service={service} />
-            ))}
-          </tbody>
-        </Table>
+        {newServices.length ? (
+          <Table>
+            <thead>
+              <th>Vehicle</th>
+              <th>Owner</th>
+              <th>Services</th>
+              <th>Total</th>
+              <th>Status</th>
+            </thead>
+            <tbody>
+              {services.length &&
+                services.map(service => <ServicesTable service={service} />)}
+            </tbody>
+          </Table>
+        ) : (
+          <p className="text-danger"> No Vehicles is with ready status </p>
+        )}
       </div>
     );
   }

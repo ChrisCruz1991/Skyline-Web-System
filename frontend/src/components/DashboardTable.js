@@ -23,11 +23,6 @@ class DashboardTable extends Component {
     const vehicle_status = STATUSES[status];
     const vehicle_color = STATUSES_COLORS[status];
 
-    // Added request by Christopher
-    if (status === 1) {
-      return null;
-    }
-
     return (
       <tr
         style={{ textAlign: "center" }}
