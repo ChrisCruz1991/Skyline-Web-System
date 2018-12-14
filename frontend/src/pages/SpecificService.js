@@ -110,13 +110,13 @@ class SpecificService extends Component {
             </Table>
           </Col>
         </Row>
-        <div className="text-center pt-4">
+        {/* <div className="text-center pt-4">
           <Button
             color="primary"
             onClick={() => this.generatePDF(this.props.match.params.id)}>
             Generate Ticket
           </Button>
-        </div>
+        </div> */}
       </Container>
     );
   }

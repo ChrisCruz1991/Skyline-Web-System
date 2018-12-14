@@ -34,6 +34,24 @@ router.get("/vehicle/dashboard", verifyToken.verifyToken, (req, res) => {
   });
 });
 
+router.get("/vehiclenew/:id", (req, res) => {
+  const id = req.params.id;
+  console.log(id);
+  pool.query(
+    `Select * 
+    from VEHICLE 
+    where VEHICLE.vehicle_id = ?`,
+    id,
+    (err, result) => {
+      if (err) throw err;
+      else {
+        console.log(result);
+        res.json(result);
+      }
+    }
+  );
+});
+
 router.get("/vehicle/:id", (req, res) => {
   const id = req.params.id;
   pool.query(

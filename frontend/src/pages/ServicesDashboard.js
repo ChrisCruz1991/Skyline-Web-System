@@ -1,8 +1,10 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router";
 import axios from "axios";
 import { getFromStorage } from "../utils/storage";
-import { Table } from "reactstrap";
+import { Table, Button } from "reactstrap";
 import ServicesTable from "../components/ServicesTable";
+import { Link } from "react-router-dom";
 
 class ServicesDashboard extends Component {
   state = {
@@ -25,19 +27,28 @@ class ServicesDashboard extends Component {
     });
   }
 
+  goToService = e => {
+    this.props.history.push(`/service/new`);
+  };
+
   render() {
     const { services } = this.state;
     console.log("services", services);
 
-    let newServices = services.includes(service => service.status === 2);
+    let newServices = services.filter(service => service.status === 2);
 
-    console.log(newServices);
+    console.log("SERVICES", newServices);
 
     return (
       <div className="text-center mt-4">
-        <h3>All Service Ticket is your Garage</h3>
+        <h3>All Service Ticket in your Garage</h3>
+        <Button>
+          <Link className="text-white" to="/services/new">
+            Add New Service
+          </Link>
+        </Button>
         {newServices.length ? (
-          <Table>
+          <Table className="mt-4">
             <thead>
               <th>Vehicle</th>
               <th>Owner</th>
@@ -46,8 +57,8 @@ class ServicesDashboard extends Component {
               <th>Status</th>
             </thead>
             <tbody>
-              {services.length &&
-                services.map(service => <ServicesTable service={service} />)}
+              {newServices.length &&
+                newServices.map(service => <ServicesTable service={service} />)}
             </tbody>
           </Table>
         ) : (

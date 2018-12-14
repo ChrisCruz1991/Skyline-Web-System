@@ -23,6 +23,8 @@ import { getFromStorage, setInStorage } from "../utils/storage";
 import axios from "axios";
 import ServicesDashboard from "../pages/ServicesDashboard";
 import SpecificService from "../pages/SpecificService";
+import ServicesNew from "../pages/ServicesNew";
+import ServicesCreate from "../components/ServicesCreate";
 
 const checkAuth = () => {
   console.log(getFromStorage("object"));
@@ -101,6 +103,11 @@ class Routes extends Component {
             <AuthRoute exact path="/employees" component={EmployeesDashboard} />
             <AuthRoute path="/employees/new" component={EmployeesForm} />
             <AuthRoute path="/employee/:id" component={EmployeePage} />
+            <AuthRoute exact path="/services/new" component={ServicesNew} />
+            <AuthRoute
+              path="/services/servicescreate/:id"
+              component={ServicesCreate}
+            />
             <AuthRoute path="/services" component={ServicesDashboard} />
             <AuthRoute path="/service/:id" component={SpecificService} />
           </Switch>

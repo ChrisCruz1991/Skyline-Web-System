@@ -30,20 +30,20 @@ export default class NewVehiclePage extends Component {
     const storage = getFromStorage("object");
     const { make, model, year, color, license_plate } = this.state;
 
-    if (make.length < 3) {
-      this.invalidInput();
-      return;
-    }
+    // if (make.length < 3) {
+    //   this.invalidInput();
+    //   return;
+    // }
 
-    if (model.length < 3) {
-      this.invalidInput();
-      return;
-    }
+    // if (model.length < 3) {
+    //   this.invalidInput();
+    //   return;
+    // }
 
-    if (year.length < 4) {
-      this.invalidInput();
-      return;
-    }
+    // if (year.length < 3) {
+    //   this.invalidInput();
+    //   return;
+    // }
     axios
       .post("http://localhost:8080/api/client/new_vehicle", {
         make,

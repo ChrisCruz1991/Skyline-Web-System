@@ -84,6 +84,82 @@ router.get("/services/:id", verifyToken.verifyToken, (req, res) => {
   });
 });
 
+router.get("/services/notrelation/:id", (req, res) => {
+  const id = req.params.id;
+  pool.query(
+    `SELECT * 
+    from VEHICLE 
+    where VEHICLE.vehicle_id not in 
+    (select SERVICE_TICKET.VEHICLE_vehicle_id 
+    from SERVICE_TICKET) 
+    and 
+    VEHICLE.GARAGE_garage_id = ?`,
+    id,
+    (err, result) => {
+      if (err) throw err;
+      else res.json(result);
+    }
+  );
+});
+
+router.post("/services/add", (req, res) => {
+  const id = req.params.id;
+  const {
+    service_ticket_id,
+    service_string,
+    price_string,
+    total,
+    VEHICLE_vehicle_id,
+    EMPLOYEE_employee_id
+  } = req.body;
+
+  console.log(VEHICLE_vehicle_id);
+  const totalStr = total.split(",");
+
+  let totalPrice = 0.0;
+
+  for (let i = 0; i < totalStr.length; i++) {
+    totalPrice += Number(totalStr[i]);
+  }
+
+  console.log(totalPrice.toFixed(2));
+
+  // ('1', 'testing', 'testing', 500, 1000, 1);
+  const INSERT_QUERY = `
+  INSERT INTO  
+  SERVICE_TICKET 
+  ( service_string, price_string, total, VEHICLE_vehicle_id, EMPLOYEE_employee_id) 
+  VALUES ?;`;
+
+  const VALUES = [
+    [
+      service_string,
+      price_string,
+      totalPrice.toFixed(2),
+      VEHICLE_vehicle_id,
+      EMPLOYEE_employee_id
+    ]
+  ];
+
+  pool.query(INSERT_QUERY, [VALUES], (err, result) => {
+    if (err) {
+      return res.send({
+        success: false,
+        code: 500,
+        message: "ERROR! ",
+        err
+      });
+    } else {
+      return res.send({
+        success: true,
+        code: 200,
+        message: "Vehicle succesfully added"
+      });
+    }
+  });
+  console.log("alguin", req.body);
+});
+
 router.get("/services/pdf/:id", verifyToken.verifyToken, (req, res) => {
   const id = req.params.id;
   jwt.verify(req.token, "secretkey", (err, authData) => {
