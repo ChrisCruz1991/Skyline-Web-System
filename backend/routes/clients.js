@@ -1,26 +1,33 @@
 const pool = require("../model/connection");
 const express = require("express");
 const router = express.Router();
+const verifyToken = require("./token");
+const jwt = require("jsonwebtoken");
 
-router.get("/clients/:id", (req, res) => {
-  const id = req.params.id;
-  pool.query(
-    `SELECT
-    client_id AS id,
-    first_name AS Name,
-    last_name AS Last_Name,
-    email AS Email,
-    phone AS Phone
-    FROM VEHICLE
-    INNER JOIN CLIENT
-    ON CLIENT.client_id = VEHICLE.CLIENT_client_id
-    WHERE VEHICLE.GARAGE_garage_id = ?`,
-    id,
-    (err, result) => {
-      if (err) throw err;
-      return res.json(result);
+router.get("/clients", verifyToken.verifyToken, (req, res) => {
+  jwt.verify(req.token, "secretkey", (err, authData) => {
+    if (err) {
+      res.sendStatus(403);
+    } else {
+      pool.query(
+        `SELECT
+        client_id AS id,
+        first_name AS Name,
+        last_name AS Last_Name,
+        email AS Email,
+        phone AS Phone
+        FROM VEHICLE
+        INNER JOIN CLIENT
+        ON CLIENT.client_id = VEHICLE.CLIENT_client_id
+        WHERE VEHICLE.GARAGE_garage_id = ?`,
+        authData.garage_id,
+        (err, result) => {
+          if (err) throw err;
+          return res.json(result);
+        }
+      );
     }
-  );
+  });
 });
 
 router.get("/client/:id", (req, res) => {
@@ -30,6 +37,9 @@ router.get("/client/:id", (req, res) => {
     client_id,
     first_name AS Name,
     last_name AS Last_Name,
+    CLIENT.email AS email,
+    CLIENT.phone as phone,
+    CLIENT.address AS address,
     make AS Make,
     model AS Model,
     color AS Color,
@@ -47,12 +57,19 @@ router.get("/client/:id", (req, res) => {
           message: "Error in client with id: " + err
         });
       }
+
       // Returns the list of vehicles of that
       // specific client by id
+
+      // si alguien mira esto porfavor es solo para salir de la clase
+      // se que no hace sentido y esta super mal lo reconozco.
       const list_vehicles = result.map(result => {
         return {
           id: result.id,
           Make: result.Make,
+          Email: result.email,
+          Phone: result.phone,
+          address: result.address,
           Model: result.Model,
           Color: result.Color,
           Year: result.Year,
@@ -71,6 +88,7 @@ router.get("/client/:id", (req, res) => {
   POST data for new client
 */
 
+// Falta Añadirle la verificacion de token.
 router.post("/client/new", (req, res) => {
   const { first_name, last_name, email, phone, address } = req.body;
 
@@ -121,8 +139,8 @@ router.post("/client/new", (req, res) => {
   POST REQUEST for adding new vehicle
   to a specific client
 */
-
 router.post("/client/new_vehicle", (req, res) => {
+  console.log("adding new vehicle");
   const {
     make,
     model,
@@ -132,10 +150,9 @@ router.post("/client/new_vehicle", (req, res) => {
     garage_id,
     client_id
   } = req.body;
-
   const INSERT_VEHICLE_QUERY = `INSERT INTO VEHICLE
-  (make, model, year, color, vehicle_in_garage, status, license_plate, CLIENT_client_id, GARAGE_garage_id)
-  VALUES ?`;
+      (make, model, year, color, vehicle_in_garage, status, license_plate, CLIENT_client_id, GARAGE_garage_id)
+      VALUES ?`;
 
   const INSERT_VEHICLE_VALUES = [
     [make, model, year, color, 1, 0, license_plate, client_id, garage_id]
@@ -143,12 +160,15 @@ router.post("/client/new_vehicle", (req, res) => {
 
   pool.query(INSERT_VEHICLE_QUERY, [INSERT_VEHICLE_VALUES], (err, result) => {
     if (err) {
-      return res.send({
+      console.log("error");
+      res.send({
         code: 500,
         success: false,
         message: "ERROR: ",
-        err
+        err,
+        error: "error"
       });
+      console.log("error");
     } else {
       return res.send({
         code: 500,

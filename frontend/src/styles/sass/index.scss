@@ -35,17 +35,21 @@
 }
 
 .signUp_background {
-  background-image: linear-gradient(
-      to right,
-      rgba(36, 162, 182, 0.3),
-      rgba(124, 156, 161, 0.23)
-    ),
-    url("https://cdn.pixabay.com/photo/2015/09/16/20/11/garage-943249_1280.jpg");
-  opacity: 0.9;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../../images/women.jpg");
   background-size: cover;
   background-position: center;
+  height: 100vh;
 }
 
 #root {
   height: 100vh;
+}
+
+.form-group {
+  margin-bottom: 0 !important;
+}
+
+::placeholder {
+  color: white;
 }

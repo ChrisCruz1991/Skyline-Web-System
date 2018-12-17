@@ -1,6 +1,7 @@
 const pool = require("../model/connection");
 const express = require("express");
 const router = express.Router();
+const jwt = require("jsonwebtoken");
 
 // post request for employee
 router.post("/login", (req, res) => {
@@ -34,19 +35,29 @@ router.post("/login", (req, res) => {
           err
         });
       } else {
+        let data = {
+          garage_id: results[0].garage_id,
+          garage_name: results[0].name,
+          employee_id: results[0].employee_id,
+          employee_name: results[0].first_name,
+          employee_last_name: results[0].last_name
+        };
         if (results.length > 0) {
           if (results[0].password === password) {
-            res.json({
-              code: 200,
-              success: true,
-              message: "login successful",
-              results: {
-                garage_id: results[0].garage_id,
-                garage_name: results[0].name,
-                employee_id: results[0].employee_id,
-                employee_name: results[0].first_name,
-                employee_last_name: results[0].last_name
-              }
+            jwt.sign(data, "secretkey", (err, token) => {
+              res.json({
+                token,
+                code: 200,
+                success: true,
+                message: "login successful",
+                results: {
+                  garage_id: results[0].garage_id,
+                  garage_name: results[0].name,
+                  employee_id: results[0].employee_id,
+                  employee_name: results[0].first_name,
+                  employee_last_name: results[0].last_name
+                }
+              });
             });
           } else {
             res.send({

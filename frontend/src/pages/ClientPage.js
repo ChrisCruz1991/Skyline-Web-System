@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Table, Container, Row, Col, Button } from "reactstrap";
-import { Link } from "react-router-dom";
 
 export default class ClientPage extends Component {
   state = {
@@ -34,22 +33,34 @@ export default class ClientPage extends Component {
       return <p>Loading...</p>;
     }
 
+    console.log("this is the client", client);
+
     const { vehicles } = client;
 
-    console.log(vehicles);
+    console.log(client);
 
     /*
   Need fixing and styling, but
   receives information properly
     */
     return (
-      <Container style={{ paddingTop: "20px" }}>
-        <Row>
-          <h3>
-            {client.name} {client.lastName}
-          </h3>
-        </Row>
-        <Row>
+      <Container className="mt-2">
+        <h3>
+          Client: {client.name} {client.lastName}
+        </h3>
+        <h5>Email: {vehicles[0].Email}</h5>
+        <h5>Phone: {vehicles[0].Phone}</h5>
+        <h5>Address: {vehicles[0].address}</h5>
+        <p />
+        <div className="d-flex flex-row-reverse">
+          <Button
+            className="mx-2"
+            onClick={() => this.onClick(vehicles[0].client_id)}
+            color="info">
+            Add New Vehicle
+          </Button>
+        </div>
+        <Row className="mt-2">
           <Col>
             <Table striped>
               <thead>
@@ -65,8 +76,7 @@ export default class ClientPage extends Component {
                   return (
                     <tr
                       key={vehicle.id}
-                      onClick={() => this.handleClick(vehicle.id)}
-                    >
+                      onClick={() => this.handleClick(vehicle.id)}>
                       <td>{vehicle.Make}</td>
                       <td>{vehicle.Model}</td>
                       <td>{vehicle.Year}</td>
@@ -78,19 +88,6 @@ export default class ClientPage extends Component {
                 })}
               </tbody>
             </Table>
-            <Row>
-              <Col>
-                <Button
-                  onClick={() => this.onClick(vehicles[0].client_id)}
-                  color="info"
-                >
-                  Add New Vehicle
-                </Button>
-              </Col>
-              <Col>
-                <Button color="danger">Cancel</Button>
-              </Col>
-            </Row>
           </Col>
         </Row>
       </Container>

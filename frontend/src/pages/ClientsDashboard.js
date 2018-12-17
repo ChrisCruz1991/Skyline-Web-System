@@ -19,8 +19,13 @@ export default class ClientsDashboard extends Component {
     isLoading: true
   };
   componentDidMount() {
-    const { garage_id } = getFromStorage("object");
-    axios.get("http://localhost:8080/api/clients/" + garage_id).then(res =>
+    const storage = getFromStorage("object");
+    const headers = {
+      headers: {
+        authorization: `Bearer ${storage.token}`
+      }
+    };
+    axios.get("http://localhost:8080/api/clients", headers).then(res =>
       this.setState({
         clients: res.data,
         isLoading: false,
@@ -53,8 +58,7 @@ export default class ClientsDashboard extends Component {
         </h2>
         <InputGroup
           className="inputGroup mx-auto"
-          style={{ borderRadius: "15px" }}
-        >
+          style={{ borderRadius: "15px" }}>
           <InputGroupAddon addonType="prepend">
             <InputGroupText>Search:</InputGroupText>
           </InputGroupAddon>

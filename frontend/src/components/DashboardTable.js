@@ -27,8 +27,7 @@ class DashboardTable extends Component {
       <tr
         style={{ textAlign: "center" }}
         id={id}
-        onClick={() => this.handleClick(id)}
-      >
+        onClick={() => this.handleClick(id)}>
         <td>{name}</td>
         <td>{make}</td>
         <td>{model}</td>
@@ -41,8 +40,7 @@ class DashboardTable extends Component {
               borderRadius: "25px",
               padding: "10px 20px",
               color: "white"
-            }}
-          >
+            }}>
             {vehicle_status}
           </span>
         </td>

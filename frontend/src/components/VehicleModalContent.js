@@ -32,7 +32,7 @@ export default class VehicleModalContent extends Component {
     const vehicleFilter = vehicles.filter(vehicle => vehicle.Status === 0);
 
     return (
-      <Row>
+      <div>
         {this.state.isClicked ? (
           <h3>
             Selected car is: {vehicleClicked.Make} {vehicleClicked.Model}
@@ -54,8 +54,7 @@ export default class VehicleModalContent extends Component {
               return (
                 <tr
                   key={vehicle.id}
-                  onClick={() => this.handleClickedRow(vehicle.id)}
-                >
+                  onClick={() => this.handleClickedRow(vehicle.id)}>
                   <td>{vehicle.Make}</td>
                   <td>{vehicle.Model}</td>
                   <td>{vehicle.Year}</td>
@@ -68,12 +67,14 @@ export default class VehicleModalContent extends Component {
           </tbody>
         </Table>
         <Row>
-          <Button color="info" onClick={this.getVehicleId}>
+          <Button className="mx-auto" color="info" onClick={this.getVehicleId}>
             Assign Vehicle
           </Button>
-          <Button color="danger">Cancel</Button>
+          <Button className="mx-auto" color="danger">
+            Cancel
+          </Button>
         </Row>
-      </Row>
+      </div>
     );
   }
 }

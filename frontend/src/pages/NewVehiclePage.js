@@ -10,7 +10,8 @@ export default class NewVehiclePage extends Component {
     model: "",
     year: "",
     color: "",
-    license_plate: ""
+    license_plate: "",
+    invalid: false
   };
 
   onChange = e => {
@@ -19,12 +20,30 @@ export default class NewVehiclePage extends Component {
     });
   };
 
+  invalidInput = _ => {
+    this.setState({
+      invalid: true
+    });
+  };
   onClick = () => {
     const client_id = this.props.match.params.id;
-    const { garage_id } = getFromStorage("object");
+    const storage = getFromStorage("object");
     const { make, model, year, color, license_plate } = this.state;
 
-    // post a request
+    // if (make.length < 3) {
+    //   this.invalidInput();
+    //   return;
+    // }
+
+    // if (model.length < 3) {
+    //   this.invalidInput();
+    //   return;
+    // }
+
+    // if (year.length < 3) {
+    //   this.invalidInput();
+    //   return;
+    // }
     axios
       .post("http://localhost:8080/api/client/new_vehicle", {
         make,
@@ -32,8 +51,8 @@ export default class NewVehiclePage extends Component {
         year,
         color,
         license_plate,
-        garage_id,
-        client_id
+        client_id,
+        garage_id: storage.results.garage_id
       })
       .then(res => {
         console.log(res);
@@ -51,12 +70,17 @@ export default class NewVehiclePage extends Component {
             <VehicleForm onChange={this.onChange} />
           </Row>
           <Row>
-            <Button onClick={this.onClick} color="info">
+            <Button className="mx-auto" onClick={this.onClick} color="info">
               Add
             </Button>
-            <Button color="warning">Cancel</Button>
+            <Button className="mx-auto" color="warning">
+              Cancel
+            </Button>
           </Row>
         </Col>
+        {this.state.invalid ? (
+          <p className="text-center text-danger">Funciona</p>
+        ) : null}
       </Container>
     );
   }

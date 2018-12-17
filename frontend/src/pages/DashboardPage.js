@@ -12,14 +12,19 @@ export default class Dashboard extends Component {
   };
 
   componentDidMount() {
-    const { garage_id, garage_name } = getFromStorage("object");
+    const storage = getFromStorage("object");
+    const headers = {
+      headers: {
+        authorization: `Bearer ${storage.token}`
+      }
+    };
     axios
-      .get("http://localhost:8080/api/vehicle/dashboard/" + garage_id)
+      .get("http://localhost:8080/api/vehicle/dashboard", headers)
       .then(res =>
         this.setState({
           vehicles: res.data,
           isLoading: false,
-          garageName: garage_name
+          garageName: storage.results.garage_name
         })
       );
   }
@@ -28,7 +33,7 @@ export default class Dashboard extends Component {
     const { vehicles, garageName, isLoading } = this.state;
 
     if (isLoading) {
-      return <p>Loading data...</p>;
+      return <p className="mt-5 pt-2">Loading data...</p>;
     }
 
     return (
@@ -42,8 +47,7 @@ export default class Dashboard extends Component {
             <tr
               style={{
                 textAlign: "center"
-              }}
-            >
+              }}>
               <th>CLIENT</th>
               <th>MAKE</th>
               <th>MODEL</th>

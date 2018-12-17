@@ -1,70 +1,87 @@
 const pool = require("../model/connection");
 const express = require("express");
 const router = express.Router();
+const verifyToken = require("./token");
+const jwt = require("jsonwebtoken");
 
-router.get("/employee/table/:id", (req, res) => {
-  const garage_id = req.params.id;
-  pool.query(
-    `SELECT
-      employee_id AS id,
-      first_name AS Name,
-      last_name AS Last_Name,
-      EMPLOYEE.phone AS Phone,
-      email AS Email,
-      EMPLOYEE.address AS Address,
-      role AS Role
-      FROM EMPLOYEE
-      INNER JOIN GARAGE
-      ON EMPLOYEE.GARAGE_garage_id=GARAGE.garage_id
-      WHERE garage_id = ?`,
-    garage_id,
-    (err, result) => {
-      if (err) throw err;
-      return res.json(result);
+router.get("/employee/table", verifyToken.verifyToken, (req, res) => {
+  console.log(req.token);
+  jwt.verify(req.token, "secretkey", (err, authData) => {
+    console.log("AuthData", authData);
+    if (err) {
+      res.sendStatus(403);
+    } else {
+      pool.query(
+        `SELECT
+        employee_id AS id,
+        first_name AS Name,
+        last_name AS Last_Name,
+        EMPLOYEE.phone AS Phone,
+        email AS Email,
+        EMPLOYEE.address AS Address,
+        role AS Role
+        FROM EMPLOYEE
+        INNER JOIN GARAGE
+        ON EMPLOYEE.GARAGE_garage_id=GARAGE.garage_id
+        WHERE garage_id = ?`,
+        authData.garage_id,
+        (err, result) => {
+          if (err) throw err;
+          return res.json(result);
+        }
+      );
     }
-  );
+  });
 });
 
-router.get("/employee/:id", (req, res) => {
-  const id = req.params.id;
-  pool.query(
-    `SELECT employee_id, vehicle_id, first_name, last_name, address, phone, role, make, model, color, year
-    FROM VEHICLE
-    INNER JOIN EMPLOYEE ON EMPLOYEE.employee_id=VEHICLE.EMPLOYEE_employee_id
-    WHERE employee_id=${id};`,
-    (err, result) => {
-      if (err) {
-        return res.send({
-          success: false,
-          message: "Dervin fucked up: " + err
-        });
-      }
-      const list_vehicles = result.map(item => {
-        return {
-          id: item.vehicle_id,
-          Make: item.make,
-          Model: item.model,
-          Color: item.color,
-          Year: item.year
-        };
-      });
-      res.json({
-        id: result[0].employee_id,
-        name: `${result[0].first_name} ${result[0].last_name}`,
-        phone: result[0].phone,
-        address: result[0].address,
-        role: result[0].role,
-        vehicle_list: list_vehicles
-      });
+// Arreglar los codigos de token
+router.get("/employee/:id", verifyToken.verifyToken, (req, res) => {
+  jwt.verify(req.token, "secretkey", (err, authData) => {
+    if (err) {
+      res.sendStatus(403);
+    } else {
+      const id = req.params.id;
+      console.log("id from employee: ", id);
+      pool.query(
+        `SELECT employee_id, vehicle_id, first_name, last_name, address, phone, role, make, model, color, year
+      FROM VEHICLE
+      INNER JOIN EMPLOYEE ON EMPLOYEE.employee_id=VEHICLE.EMPLOYEE_employee_id
+      WHERE employee_id=?`,
+        id,
+        (err, result) => {
+          if (err) {
+            return res.send({
+              success: false,
+              message: "Dervin fucked up: " + err
+            });
+          }
+          const list_vehicles = result.map(item => {
+            return {
+              id: item.vehicle_id,
+              Make: item.make,
+              Model: item.model,
+              Color: item.color,
+              Year: item.year
+            };
+          });
+          res.json({
+            id: result[0].employee_id,
+            name: `${result[0].first_name} ${result[0].last_name}`,
+            phone: result[0].phone,
+            address: result[0].address,
+            role: result[0].role,
+            vehicle_list: list_vehicles
+          });
+        }
+      );
     }
-  );
+  });
 });
 
 /*
-  router post to insert new employee
-  for your specific garage
-*/
-
+    router post to insert new employee
+    for your specific garage
+  */
 router.post("/employee/new", (req, res) => {
   const { first_name, last_name, phone, address, garage_id } = req.body;
 
@@ -87,8 +104,8 @@ router.post("/employee/new", (req, res) => {
           });
         } else {
           const INSERT_QUERY = `INSERT INTO EMPLOYEE
-          (first_name, last_name, phone, address, role, GARAGE_garage_id)
-          VALUES ?`;
+                (first_name, last_name, phone, address, role, GARAGE_garage_id)
+                VALUES ?`;
           const VALUES = [
             [first_name, last_name, phone, address, "mechanic", garage_id]
           ];

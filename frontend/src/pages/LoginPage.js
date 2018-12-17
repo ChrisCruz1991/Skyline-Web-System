@@ -31,9 +31,10 @@ export default class LoginPage extends Component {
         console.log(res);
         if (res.data.success) {
           console.log("Im in");
-          const obj = res.data.results;
+          const obj = { token: res.data.token, results: res.data.results };
           setInStorage("object", obj);
-          this.props.history.push("/dashboard");
+          // this.props.history.push("/dashboard");
+          this.props.history.push("/vehicle");
         }
       })
       .catch(error => console.log(error));
@@ -46,13 +47,17 @@ export default class LoginPage extends Component {
           className="d-flex justify-content-center align-items-center"
           style={{
             borderRadius: "10px",
-            height: "93vh"
-          }}
-        >
+            height: "100vh"
+          }}>
           <div className="d-block">
             <div className="d-flex justify-content-center align-items-center">
-              <div className="d-block" style={{ height: "500px" }}>
-                <h2 style={{ textAlign: "center", color: "white" }}>
+              <div className="d-block">
+                <h2
+                  style={{
+                    textAlign: "center",
+                    color: "white",
+                    marginBottom: "20px"
+                  }}>
                   Login Page
                 </h2>
                 <UserLoginForm
@@ -66,8 +71,7 @@ export default class LoginPage extends Component {
                   <Button
                     className="mx-5"
                     color="success"
-                    onClick={this.onLogInClick}
-                  >
+                    onClick={() => this.onLogInClick()}>
                     Log In
                   </Button>
                 </div>

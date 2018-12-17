@@ -13,11 +13,16 @@ export default class EmployeePage extends Component {
 
   componentDidMount() {
     const id = this.props.match.params.id;
-    const { garage_id } = getFromStorage("object");
+    const storage = getFromStorage("object");
+    const headers = {
+      headers: {
+        authorization: `header ${storage.token}`
+      }
+    };
     axios
       .all([
-        axios.get(`http://localhost:8080/api/employee/${id}`),
-        axios.get(`http://localhost:8080/api/vehicle/dashboard/${garage_id}`)
+        axios.get(`http://localhost:8080/api/employee/${id}`, headers),
+        axios.get(`http://localhost:8080/api/vehicle/dashboard`, headers)
       ])
       .then(
         axios.spread((employee, vehicles) => {
@@ -69,10 +74,11 @@ export default class EmployeePage extends Component {
       receives information properly
     */
 
+    console.log(vehicles);
     return (
       <Container>
         <Row>
-          <Col className="col-md-6 mt-3">
+          <Col className="mt-3" md={6}>
             <h3 className="">{name}</h3>
             <p>Role: {role}</p>
             <p>Phone Number: {phone}</p>
