@@ -1,0 +1,63 @@
+<style type="text/css">
+    body {
+        font-family: 'Courier New', Courier, monospace;
+        letter-spacing: 2px;
+    }
+
+    table {
+        width: 100%;
+    }
+
+    table tr {
+        border-bottom: .5px solid black;
+    }
+
+    table tr td {
+        padding: 7px 0;
+
+    }
+
+    .float-left {
+        float: left;
+    }
+
+    .float-right {
+        float: right;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .container {
+        padding: 30px 60px;
+    }
+
+    .total {}
+</style>
+<html>
+
+<body class="container">
+    <h1 class="text-center">Garage: {{garage}}</h1>
+    <p class="text-center">{{employee}}</p>
+    <p class="text-center">{{client}}</p>
+    <p class="text-center">{{vehicle}}</p>
+
+    <table>
+        <tr>
+            <th class="float-left">SERVICES</th>
+            <th class="float-right">COST</th>
+        </tr>
+        {{#each services as |ser|}}
+        <tr>
+            <td class="float-left">{{ser.service}}</td>
+            <td class="float-right">${{ser.cost}}</td>
+        </tr>
+        {{/each}}
+    </table>
+    <p class="float-right">Total: ${{total}}</p>
+
+    <p></p>
+</body>
+
+</html>
